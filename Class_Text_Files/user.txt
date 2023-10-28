@@ -1,0 +1,73 @@
+
+
+/* Decompiler 19ms, total 228ms, lines 70 */
+package org.ecp.people;
+
+import org.ecp.items.Product;
+
+public abstract class User {
+   protected String email = "unknown";
+   protected String password = "unknown";
+   protected String username;
+   protected double accountBalance;
+
+   User() {
+      this.password = "unknown";
+      this.accountBalance = 0.0D;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
+   }
+
+   public String getEmail() {
+      return this.email;
+   }
+
+   public void setPassword(String password) {
+      this.password = password;
+   }
+
+   public String getPassword() {
+      return this.password;
+   }
+
+   public void setUsername(String username) {
+      this.username = username;
+   }
+
+   public String getUsername() {
+      return this.username;
+   }
+
+   public void setAccountBalance(double accountBalance) {
+      this.accountBalance = accountBalance;
+   }
+
+   public double getAccountBalance() {
+      return this.accountBalance;
+   }
+
+   public void removeFunds(Integer amount) {
+      if (this.accountBalance - (double)amount >= 0.0D) {
+         this.accountBalance -= (double)amount;
+      }
+
+   }
+
+   public abstract void createAccount();
+
+   public abstract void addProduct(Product var1);
+
+   public abstract void removeProduct(Product var1);
+
+   protected void deleteAccount() {
+   }
+
+   protected void login() {
+   }
+
+   protected void logout() {
+   }
+}
+

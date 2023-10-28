@@ -1,0 +1,21 @@
+
+
+/* Decompiler 3ms, total 309ms, lines 19 */
+package org.ecp.navigation;
+
+import java.util.ArrayList;
+
+public class OnlineMaps {
+   private ArrayList<String> addressList = null;
+
+   OnlineMaps() {
+   }
+
+   public void setAddressList(String address) {
+      this.addressList.add(address);
+   }
+
+   public ArrayList<String> getAddressList() {
+      return this.addressList;
+   }
+}

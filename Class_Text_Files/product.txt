@@ -1,0 +1,47 @@
+
+
+/* Decompiler 8ms, total 624ms, lines 44 */
+package org.ecp.items;
+
+public class Product {
+   private String name = "unknown";
+   private double price = 0.0D;
+   private String description = "unknown";
+   private Integer quantity = 0;
+
+   Product() {
+   }
+
+   public void setName(String name) {
+      this.name = name;
+   }
+
+   public String getName() {
+      return this.name;
+   }
+
+   public void setPrice(double price) {
+      this.price = price;
+   }
+
+   public double getPrice() {
+      return this.price;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public String getDescription() {
+      return this.description;
+   }
+
+   public void setQuantity(Integer quantity) {
+      this.quantity = quantity;
+   }
+
+   public Integer getQuantity() {
+      return this.quantity;
+   }
+}
+
