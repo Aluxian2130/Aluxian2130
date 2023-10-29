@@ -4,11 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import org.ecp.people.Customer;
 
 public class HomePage extends JFrame implements ActionListener {
 	JButton log_in_out_b;
@@ -17,9 +20,13 @@ public class HomePage extends JFrame implements ActionListener {
 	JButton username_b;
 	JButton password_b;
 	
+	private ArrayList<Customer> customerList; 
 	
 	
 	public HomePage() {
+		
+		customerList = new ArrayList<Customer>();
+		
 		this.setTitle("E-commerce platform");
 		this.getContentPane().setBackground(new Color(146,162,166));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,25 +69,38 @@ public class HomePage extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		System.out.println("Log in button pressed");
 		// TODO Auto-generated method stub
 		if(e.getSource() == log_in_out_b) {
+			System.out.println("Log in button pressed");
 			//log_in_out_b.setVisible(false);
-			String email = JOptionPane.showInputDialog(null, "Enter Email");
-			System.out.println(email);
-			
-			String username = JOptionPane.showInputDialog(null, "Enter username");
-			System.out.println(username);
-			
-			String password = JOptionPane.showInputDialog(null, "Enter password");
-			System.out.println(password);
 			//log_in_out_b.setEnabled(false);
-			
-			
 		}
 		else if(e.getSource() == sign_up_b) {
 			
+			//testing if it's customer
+			Customer x = new Customer();
+			
+			System.out.println("Sign up button pressed");
+			String email = JOptionPane.showInputDialog(null, "Enter Email");
+			//System.out.println(email);
+			
+			String username = JOptionPane.showInputDialog(null, "Enter username");
+			//System.out.println(username);
+			
+			String password = JOptionPane.showInputDialog(null, "Enter password");
+			//System.out.println(password);
+			if(email != null && username != null && password != null) {
+				x.setEmail(email);
+				x.setUsername(username);
+				x.setPassword(password);
+				customerList.add(x);
+			}
+		}
+		System.out.println("Customers present in system");
+		for(Customer y: customerList) {
+			System.out.println(y.getUsername());
 		}
 	}
+	
+	
 }
