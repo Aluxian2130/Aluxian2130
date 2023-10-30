@@ -12,13 +12,34 @@ public class Admin {
    private static ArrayList<Order> deliveryList;
    private ArrayList<User> userList;
 
-   Admin() {
-      maxLimit = 0.0;
-      maxProducts = 0;
+   public Admin() {
+      maxLimit = 0.0D;
       itemDirectory = new ArrayList<Product>();
       deliveryList = new ArrayList<Order>();
       userList = new ArrayList<User>();
    }
+   
+   public Boolean detectSignupConflict(String email, String username, String password) {
+	   //if(this.getUserList().contains(user_A))
+	   for(User x: this.getUserList()) {
+		   if(x.getUsername().equals(username) ) {
+			   System.out.println("Username already exists.\nRe enter username");
+			   return true;
+		   }
+		   //if(x.getEmail().equals(email) ) {
+			//   System.out.println("Email already exists.\nRe enter email");
+			//  return true;
+		   //}
+	   }
+	   
+	   if(email == null || username == null || password == null) {
+		   System.out.println("Please fill all required information");
+		   return true;
+	   }
+	   
+	   return false;
+   }
+
 
    public void setMaxLimit(double maxLimit) {
       Admin.maxLimit = maxLimit;
