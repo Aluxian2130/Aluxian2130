@@ -8,28 +8,33 @@ import org.ecp.navigation.OnlineMaps;
 import org.ecp.system.Admin;
 
 public class Customer extends User {
-   private String address = "unknown";
-   private ArrayList<Product> shoppingCart = new ArrayList();
+   private String address;
+   private ArrayList<Product> shoppingCart;
+   private Order orderedProducts;
 
-   Customer() {
+   public Customer() {
+	   address = "unknown";
+	   shoppingCart = new ArrayList<Product>();
+	   orderedProducts = null;
    }
 
-   public void setAddress(Integer addressPos) {
-      OnlineMaps om = null; //maybe have a new OnlineMaps object for diff countries etc???
-      
-      Scanner myObj = new Scanner(System.in);
-      String addressChosen = myObj.nextLine();
-      System.out.println("Choose an address from this list: ");
-      System.out.println(om.getAddressList());
-      
-      if (om.getAddressList().contains(addressChosen)) {
-    	 address = addressChosen;
-      }
-      else {
-    	  System.out.println("Entered an invalid address. ");
-      }
-      
-
+   public void setAddress(String addressChosen) {//still need to fix this and chooseAddress
+      this.address = addressChosen;
+   }
+   
+   public void chooseAddress(OnlineMaps location) {
+	   System.out.println("Choose an address from this list: ");
+	      System.out.println(location.getAddressList());
+	      
+	      Scanner myObj = new Scanner(System.in);
+	      String addressChosen = myObj.nextLine();
+	      
+	      if (location.getAddressList().contains(addressChosen)) {
+	    	 setAddress(addressChosen);
+	      } //check in setAddress;
+	      else {
+	    	  System.out.println("Entered an invalid address. ");
+	      }
    }
 
    public String getAddress() {
@@ -75,17 +80,50 @@ public class Customer extends User {
       }
 
    }
-
+   
+   public void checkOut() {
+	   if (this.shoppingCart.size() == 0) {
+		   System.out.println("Cannot check out, no items in shopping cart.");
+	   }
+	   else {
+		   for (Product product : this.shoppingCart) {
+			   this.orderedProducts.addProductNames(product.getName());
+		   }
+		   completePayment();
+	   }
+		   
+   }
    public void completePayment() {
+	   orderedProducts.setCustomerName(this.username);
+	   orderedProducts.setCustomerAddress(this.address);
+	   orderedProducts.setStatus("Shipped"); //waiting for driver
+	   orderedProducts.setDate(1); //CHANGE TO ADD CURRENT DATE (DATE OR TIMESTAMP ORDER IS PLACED)
+	   Admin.getDeliveryList().add(orderedProducts);
    }
 
-   public void cancelOrder(Order order) {
+   public void cancelOrder() {
+	   Scanner myObj = new Scanner(System.in);
+	   System.out.println("Enter the name your order is placed under: ");
+	   String userName = myObj.nextLine();
+	   Integer currentDate = 0; ///GET CURRENT DATE TO CHECK IF USER IS ALLOWED TO CANCEL ORDER
+	   for (Order order : Admin.getDeliveryList()) {
+		   if (order.getCustomerName() == userName) {
+			   if (order.getDate() < currentDate) {
+				   Admin.getDeliveryList().remove(orderedProducts);
+			   }
+			   else {
+				   System.out.println("Cannot cancel order, time of cancellation request is too close to delivery date.");
+			   }
+		   }
+		   else {
+			   System.out.println("There is no order under that name.");
+		   }
+	   }
    }
 
    public void submitComplaint() {
    }
 
-   public void createAccount() {
-   }
+   
 }
 
