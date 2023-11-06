@@ -1,13 +1,17 @@
-package org.ecp.people;
+package org.ecp.test.Driver_Files;
+
+import java.util.ArrayList;
 
 import org.ecp.items.Order;
+import org.ecp.people.Driver;
 import org.ecp.system.Admin;
 
-public class DriverDriver {
+public class TestDriver {
 
-    public static void main(String[] args) {
+    @SuppressWarnings("static-access")
+	public static void main(String[] args) {
 
-        // Create a Driver
+
         Driver driver = new Driver();
         driver.setUsername("test_driver");
 
@@ -17,9 +21,12 @@ public class DriverDriver {
         Order order3 = new Order();
 
         // Add orders to the delivery driver's delivery list
-        driver.addDelivery(order1);
-        driver.addDelivery(order2);
-        driver.addDelivery(order3);
+        Admin admin = new Admin();
+        admin.setDeliveryList(new ArrayList<Order>());
+        admin.getDeliveryList().add(order1);
+        admin.getDeliveryList().add(order2);
+        admin.getDeliveryList().add(order3);
+        driver.setDeliveryList(admin.getDeliveryList());
 
         // Remove an order from the delivery list
         driver.removeDelivery(order2);

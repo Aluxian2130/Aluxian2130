@@ -12,7 +12,9 @@ public class Admin {
    private static ArrayList<Order> deliveryList;
    private ArrayList<User> userList;
 
+   
    public Admin() {
+	  maxProducts = 2;
       maxLimit = 0.0D;
       itemDirectory = new ArrayList<Product>();
       deliveryList = new ArrayList<Order>();

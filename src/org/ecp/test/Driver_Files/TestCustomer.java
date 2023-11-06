@@ -1,9 +1,10 @@
-package org.ecp.people;
+package org.ecp.test.Driver_Files;
 
 import org.ecp.items.Product;
+import org.ecp.people.Customer;
 import org.ecp.system.Admin;
 
-public class CustomerDriver {
+public class TestCustomer {
 
     public static void main(String[] args) {
 
@@ -17,9 +18,9 @@ public class CustomerDriver {
         customer.addFunds(50.0);
 
         // Create some products
-        Product product1 = new Product("Product A", 10.0);
-        Product product2 = new Product("Product B", 15.0);
-        Product product3 = new Product("Product C", 20.0);
+        Product product1 = new Product("Product A", 10.0, 1);  // Specify quantity
+        Product product2 = new Product("Product B", 15.0, 1);  // Specify quantity
+        Product product3 = new Product("Product C", 20.0, 1);  // Specify quantity
 
         // Add products to the customer's shopping cart
         customer.addProduct(product1);
@@ -42,7 +43,7 @@ public class CustomerDriver {
         // Print the shopping cart
         System.out.println("\nShopping Cart:");
         for (Product product : customer.getShoppingCart()) {
-            System.out.println(product.getName() + " - $" + product.getPrice());
+            System.out.println(product.getName() + " - $" + product.getPrice() + " - Quantity: " + product.getQuantity());
         }
     }
 }

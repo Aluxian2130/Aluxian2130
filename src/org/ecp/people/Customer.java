@@ -11,7 +11,7 @@ public class Customer extends User {
    private String address = "unknown";
    private ArrayList<Product> shoppingCart = new ArrayList();
 
-   Customer() {
+   public Customer() {
    }
 
    public void setAddress(Integer addressPos) {

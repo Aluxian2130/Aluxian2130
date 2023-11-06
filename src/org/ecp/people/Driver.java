@@ -2,12 +2,14 @@ package org.ecp.people;
 
 import java.util.ArrayList;
 import org.ecp.items.Order;
+import org.ecp.items.Product;
 import org.ecp.system.Admin;
 
-public abstract class Driver extends User {
+public class Driver extends User {
    private ArrayList<Order> deliveries;
 
-   Driver() {
+
+   public Driver() {
 	   deliveries = new ArrayList<Order>();
    }
 
@@ -43,5 +45,17 @@ public abstract class Driver extends User {
 
    public void createAccount() {
    }
+
+@Override
+public void addProduct(Product var1) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void removeProduct(Product var1) {
+	// TODO Auto-generated method stub
+	
+}
 }
 
