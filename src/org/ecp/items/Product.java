@@ -2,17 +2,22 @@ package org.ecp.items;
 
 public class Product {
    private String name;
-   private double price;
+   private Double price;
    private String description;
    private Integer quantity;
 
-   Product() {
+   public Product() {
 	   name = "unknown";
-	   price = 0.0;
+	   price = null;
 	   description = "unknown";
 	   quantity = 0;
    }
-
+   
+   public Product(String name, double price, Integer quantity) {
+ 	   this.name = name;
+ 	   this.price = price;
+ 	   this.quantity = quantity;
+    }
    public void setName(String name) {
       this.name = name;
    }
@@ -25,7 +30,7 @@ public class Product {
       this.price = price;
    }
 
-   public double getPrice() {
+   public Double getPrice() {
       return price;
    }
 
