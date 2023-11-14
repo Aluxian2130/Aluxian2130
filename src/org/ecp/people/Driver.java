@@ -10,6 +10,7 @@ import org.ecp.system.Admin;
 public class Driver extends User {
    private ArrayList<Order> deliveries;
 
+
    public Driver() {
 	   deliveries = new ArrayList<Order>();
    }

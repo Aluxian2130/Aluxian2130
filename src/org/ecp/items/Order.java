@@ -6,12 +6,14 @@ public class Order{
     private String customerAddress;
     private String status;
     private Integer date;
+    private Integer id;
     
-    Order() {
+    public Order() {
         customerName = "unknown";
         customerAddress = "unknown";
         status = "unknown";
         date = 0;
+        id = null;
     }
     
     public void setCustomerName(String customerName) {
@@ -45,4 +47,12 @@ public class Order{
     public Integer getDate() {
         return date;
     }
+    
+    public void setId(Integer id) {
+    	this.id = id;
+    }
+    
+	public Integer getId() {
+		return id;
+	}
 }
