@@ -19,7 +19,7 @@ class UnitTests {
     @Test
     public void testSetAddress() {
         Customer customer = new Customer();
-        customer.setAddress(1); // Assuming 1 is a valid address position
+        customer.setAddress("2402 Water st"); // Assuming 1 is a valid address position
 //        assertEquals("Address should be set to the chosen address", "chosen address", customer.getAddress());
     }
 
@@ -71,7 +71,7 @@ class UnitTests {
         Driver driver = new Driver();
         Order order = new Order();
 //        Admin.addOrder(order); // Assuming there's an `addOrder` method in the Admin class
-        driver.addDelivery(order);
+        driver.completeDelivery(order);
         assertTrue("Driver should have the added delivery", driver.getDeliveryList().contains(order));
     }
 
@@ -80,8 +80,8 @@ class UnitTests {
         Driver driver = new Driver();
         Order order = new Order();
 //        Admin.addOrder(order);
-        driver.addDelivery(order);
-        driver.removeDelivery(order);
+        driver.completeDelivery(order);
+        driver.completeDelivery(order);
         assertFalse("Driver should not have the removed delivery", driver.getDeliveryList().contains(order));
     }
 
@@ -90,7 +90,7 @@ class UnitTests {
         Driver driver = new Driver();
         Order order = new Order();
 //        Admin.addOrder(order);
-        driver.addDelivery(order);
+        driver.completeDelivery(order);
         driver.completeDelivery(order);
 //        assertEquals("Order should be marked as delivered", "delivered", order.getStatus());
         assertFalse("Admin should not have the delivered order", Admin.getDeliveryList().contains(order));

@@ -31,7 +31,7 @@ public class TestCustomer {
         customer.removeProduct(product2);
 
         // Set the customer's address
-        customer.setAddress(1); // Assuming 1 is a valid address position
+        customer.setAddress("2402 Water St"); // Enter String for address
 
         // Print the customer's information
         System.out.println("Customer Information:");
