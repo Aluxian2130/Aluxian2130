@@ -7,6 +7,7 @@ public class Order{
     private String status;
     private Integer date;
     private Integer id;
+    private Integer deliveryDate; // New field for delivery date
     
     public Order() {
         customerName = "unknown";
@@ -55,4 +56,12 @@ public class Order{
 	public Integer getId() {
 		return id;
 	}
+
+    public Integer getDeliveryDate() {
+        return deliveryDate;
+    }
+    
+    public void setDeliveryDate(Integer deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
 }
