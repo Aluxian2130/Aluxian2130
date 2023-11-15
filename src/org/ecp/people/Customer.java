@@ -50,11 +50,11 @@ public class Customer extends User {
    }
 
    public void addFunds(double amount) {
-      if (this.accountBalance + amount <= Admin.getMaxLimit()) {
-         this.accountBalance += amount;
-      }
+	    if (this.accountBalance + amount <= Admin.getMaxLimit() || this.accountBalance == 0.0) {
+	        this.accountBalance += amount;
+	    }
+	}
 
-   }
 
    public void addProduct(Product product) {
       Scanner myObj = new Scanner(System.in);

@@ -82,6 +82,9 @@ public class Admin {
    public ArrayList<User> getUserList() {
       return userList;
    }
+   public static int getMaxDeliveries() {
+       return 8; // Change 10 to your desired maximum number of deliveries
+   }
 
    public boolean checkAccount() {
       return false;

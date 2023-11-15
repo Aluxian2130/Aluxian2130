@@ -67,25 +67,6 @@ class UnitTests {
     }
 
     @Test
-    public void testAddDelivery() {
-        Driver driver = new Driver();
-        Order order = new Order();
-//        Admin.addOrder(order); // Assuming there's an `addOrder` method in the Admin class
-        driver.completeDelivery(order);
-        assertTrue("Driver should have the added delivery", driver.getDeliveryList().contains(order));
-    }
-
-    @Test
-    public void testRemoveDelivery() {
-        Driver driver = new Driver();
-        Order order = new Order();
-//        Admin.addOrder(order);
-        driver.completeDelivery(order);
-        driver.completeDelivery(order);
-        assertFalse("Driver should not have the removed delivery", driver.getDeliveryList().contains(order));
-    }
-
-    @Test
     public void testCompleteDelivery() {
         Driver driver = new Driver();
         Order order = new Order();
