@@ -8,7 +8,7 @@ public class Product {
 
    public Product() {
 	   name = "unknown";
-	   price = null;
+	   price = 0.0;
 	   description = "unknown";
 	   quantity = 0;
    }

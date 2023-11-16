@@ -1,20 +1,23 @@
 package org.ecp.items;
 
+import java.util.ArrayList;
+
 public class Order{
 	
     private String customerName;
     private String customerAddress;
     private String status;
-    private Integer date;
-    private Integer id;
-    private Integer deliveryDate; // New field for delivery date
+    private Integer date; //date order was placed 
+    private Integer deliveryDate;
+    private ArrayList<String> products;
     
     public Order() {
         customerName = "unknown";
         customerAddress = "unknown";
         status = "unknown";
         date = 0;
-        id = null;
+        deliveryDate = date + 7;
+        products = new ArrayList<String>();
     }
     
     public void setCustomerName(String customerName) {
@@ -49,19 +52,23 @@ public class Order{
         return date;
     }
     
-    public void setId(Integer id) {
-    	this.id = id;
+    public void setDeliveryDate(Integer value) {
+    	if (value == 0) {
+    		this.deliveryDate = this.date + 7;
+    	}
+    	else {
+    		this.deliveryDate = value;
+    	}
     }
     
-	public Integer getId() {
-		return id;
-	}
-
     public Integer getDeliveryDate() {
         return deliveryDate;
     }
     
-    public void setDeliveryDate(Integer deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void addProductNames(String name) {
+    	products.add(name);
+    }
+    public ArrayList<String> getProducts() {
+    	return this.products;
     }
 }
