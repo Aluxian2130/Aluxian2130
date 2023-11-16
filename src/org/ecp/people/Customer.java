@@ -52,9 +52,13 @@ public class Customer extends User {
    }
 
    public void addFunds(double amount) {
-      if ((amount > 0) && (this.accountBalance + amount <= Admin.getMaxLimit())) {
-         this.accountBalance += amount;
+      if (amount <= 0.0D) {
+    	  System.out.println("Please enter amount greater than $0.0. ");
       }
+      else if (this.accountBalance + amount >= Admin.getMaxLimit()) {
+    	  System.out.println("Amount exceeds account max limit. ");
+      }
+      else { this.accountBalance += amount; }
 
    }
 
