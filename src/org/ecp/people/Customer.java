@@ -18,8 +18,13 @@ public class Customer extends User {
 	   orderedProducts = null;
    }
 
-   public void setAddress(String addressChosen) {//still need to fix this and chooseAddress
-      this.address = addressChosen;
+   public void setAddress(String addressChosen) {
+       if (isValidString(addressChosen)) {
+           this.address = addressChosen;
+           System.out.println("Address set to: " + this.address);
+       } else {
+           System.out.println("Invalid address format!");
+       }
    }
    
    public void chooseAddress(OnlineMaps location) {
@@ -50,10 +55,14 @@ public class Customer extends User {
    }
 
    public void addFunds(double amount) {
-	    if (this.accountBalance + amount <= Admin.getMaxLimit() || this.accountBalance == 0.0) {
+	    if (amount > 0) { // Ensure the amount to add is positive
 	        this.accountBalance += amount;
+	        System.out.println("Funds added successfully. Current balance: " + this.accountBalance);
+	    } else {
+	        System.out.println("Invalid amount. Please provide a positive amount to add.");
 	    }
 	}
+
 
 
    public void addProduct(Product product) {
@@ -123,7 +132,11 @@ public class Customer extends User {
 
    public void submitComplaint() {
    }
-
+   private boolean isValidString(String input) {
+       // Add your logic here to validate the address as a string
+       // For a simple check, you can ensure that the input is not empty
+       return input != null && !input.trim().isEmpty();
+   }
    
 }
 

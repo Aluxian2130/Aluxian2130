@@ -19,8 +19,9 @@ class UnitTests {
     @Test
     public void testSetAddress() {
         Customer customer = new Customer();
-        customer.setAddress("2402 Water st"); // Assuming 1 is a valid address position
-//        assertEquals("Address should be set to the chosen address", "chosen address", customer.getAddress());
+        customer.setAddress("2402 Water st"); 
+        assertEquals("Address should be set to the chosen address", "chosen address", customer.getAddress());
+        System.out.println("Address Successfully added: 2402 Water St. ");
     }
 
     @Test
@@ -31,6 +32,7 @@ class UnitTests {
         shoppingCart.add(product1);
         customer.setShoppingCart(shoppingCart);
         assertEquals("Shopping cart should be set", shoppingCart, customer.getShoppingCart());
+        System.out.println("testSetShoppingCart successful");
     }
 
     @Test
@@ -38,6 +40,7 @@ class UnitTests {
         Customer customer = new Customer();
         customer.addFunds(50.0);
         assertEquals("Account balance should be increased", 50.0, customer.getAccountBalance(), 0.01);
+        System.out.println("Funds increased by 50.0");
     }
 
     @Test
@@ -46,6 +49,7 @@ class UnitTests {
         Product product = new Product("Product 1", 10.0, 3);
         customer.addProduct(product);
         assertEquals("Shopping cart should contain the added product", 1, customer.getShoppingCart().size());
+        System.out.println("Product Added ");
     }
 
     @Test
@@ -55,6 +59,7 @@ class UnitTests {
         customer.addProduct(product);
         customer.removeProduct(product);
         assertEquals("Shopping cart should not contain the removed product", 0, customer.getShoppingCart().size());
+        System.out.println("Product 1 added and removed successfully. ");
     }
     @Test
     public void testSetDeliveryList() {
@@ -64,6 +69,7 @@ class UnitTests {
         deliveryList.add(order1);
         driver.setDeliveryList(deliveryList);
         assertEquals("Delivery list should be set", deliveryList, driver.getDeliveryList());
+        System.out.println("Delivery List SET! ");
     }
 
     @Test
@@ -76,7 +82,7 @@ class UnitTests {
 //        assertEquals("Order should be marked as delivered", "delivered", order.getStatus());
         assertFalse("Admin should not have the delivered order", Admin.getDeliveryList().contains(order));
         assertFalse("Driver should not have the delivered order", driver.getDeliveryList().contains(order));
-        // You might need to add more assertions based on the expected behavior
+        System.out.println("Completed Delivery! ");
     }
     @Test
     public void testSetProductList() {
@@ -86,6 +92,7 @@ class UnitTests {
         productList.add(product1);
         seller.setProductList(productList);
         assertEquals("Product list should be set", productList, seller.getProductList());
+        System.out.println("Product List SET!");
     }
 
     @Test
@@ -96,6 +103,7 @@ class UnitTests {
         // Mocking user input is beyond the scope of this test, so it's not shown here.
         seller.addToProductList(product);
         assertTrue("Seller should have the added product: ", seller.getProductList().contains(product));
+        System.out.println("Product Added");
     }
 
     @Test
@@ -105,6 +113,7 @@ class UnitTests {
         seller.addToProductList(product);
         seller.removeProduct(product);
         assertFalse("Seller should not have the removed product: ", seller.getProductList().contains(product));
+        System.out.println("Product Removed!");
     }
     
     
