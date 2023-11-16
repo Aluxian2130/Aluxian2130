@@ -11,8 +11,10 @@ public class TestCustomer {
         // Create a Customer
         Customer customer = new Customer();
         Admin.setMaxLimit(100.0);
-        
+        customer.setAccountBalance(80.0);
         // Add some funds to the customer's account
+        System.out.println("Adding Funds.......");
+        customer.addFunds(5.0);
         customer.addFunds(50.0);
 
         // Create some products
