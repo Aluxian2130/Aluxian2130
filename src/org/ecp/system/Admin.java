@@ -3,6 +3,9 @@ package org.ecp.system;
 import java.util.ArrayList;
 import org.ecp.items.Order;
 import org.ecp.items.Product;
+import org.ecp.people.Customer;
+import org.ecp.people.Driver;
+import org.ecp.people.Seller;
 import org.ecp.people.User;
 
 public class Admin {
@@ -11,15 +14,16 @@ public class Admin {
    private static Integer maxDeliveries;
    private ArrayList<Product> itemDirectory;
    private static ArrayList<Order> deliveryList;
-   private ArrayList<User> userList;
+   //private ArrayList<User> userList;
+   private static ArrayList<User> userList = new ArrayList<User>();
 
-   Admin() {
+   public Admin() {
       maxLimit = 0.0D;
       maxProducts = 10;
       maxDeliveries = 5;
       itemDirectory = new ArrayList<Product>();
       deliveryList = new ArrayList<Order>();
-      userList = new ArrayList<User>();
+      //userList = new ArrayList<User>();
    }
 
    public void setMaxLimit(double maxLimit) {
@@ -63,7 +67,7 @@ public class Admin {
    }
 
    public void setUserList(ArrayList<User> userList) {
-      this.userList = userList;
+      Admin.userList = userList;
    }
 
    public ArrayList<User> getUserList() {
@@ -74,13 +78,13 @@ public class Admin {
 	   //if(this.getUserList().contains(user_A))
 	   for(User x: this.getUserList()) {
 		   if(x.getUsername().equals(username) ) {
-			   System.out.println("Username already exists.\nRe enter username");
+			   System.out.println("Username: " + x.getUsername() + " already exists.\nRe enter username");
 			   return true;
 		   }
-		   //if(x.getEmail().equals(email) ) {
-			//   System.out.println("Email already exists.\nRe enter email");
-			//  return true;
-		   //}
+		   if(x.getEmail().equals(email) ) {
+			   System.out.println("Email: " + x.getEmail() + " already exists.\nRe enter email");
+			   return true;
+		   }
 	   }
 	   
 	   if(email == null || username == null || password == null) {
@@ -90,6 +94,37 @@ public class Admin {
 	   
 	   return false;
    }
+   
+   public static void printSellers() {
+	   for(User x: userList) { 
+		if(x instanceof Seller) {
+		System.out.println(x.getUsername());   
+		}
+	   }
+   }
+   
+   public static void printCustomers() {
+	   for(User x: userList) { 
+		   if(x instanceof Customer) {
+			   System.out.println(x.getUsername());   
+		   }
+	   }
+   }
+   
+   public static void printDrivers() {
+	   for(User x: userList) { 
+		   if(x instanceof Driver) {
+			   System.out.println(x.getUsername());
+		   }
+	   }
+   }
+   
+   public static void printUsers() {
+	   printSellers();
+	   printCustomers();
+	   printDrivers();
+   }
+   
    
    public boolean checkAccount() {
       return false;
