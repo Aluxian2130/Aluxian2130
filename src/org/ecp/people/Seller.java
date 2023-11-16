@@ -7,13 +7,20 @@ import org.ecp.system.Admin;
 
 public class Seller extends User {
    private ArrayList<Product> products;
+   private Double overdue;
    //private Product p1;
    //private Admin a1 = new Admin();
 
    public Seller() {
 	   products = new ArrayList<Product>();
+	   overdue = 0.0D;
    }
-
+   public Seller(String email, String password, String username, double accountBalance) {
+	   this.email = email;
+	   this.password = password;
+	   this.username = username;
+	   this.accountBalance = accountBalance;
+   }
    public ArrayList<Product> getProductList() {
       return this.products;
    }
@@ -74,6 +81,7 @@ public class Seller extends User {
 		   this.setProduct(p1);
 		   if (p1.getName() != "unknown" && p1.getPrice() != null) {
 			   this.addToProductList(p1);
+			   p1.setSeller(this);
 		   }
 		   else {
 			   System.out.println("Cannot add product to your account. "
@@ -91,6 +99,28 @@ public class Seller extends User {
    public void addToProductList(Product p1) {
 	   this.products.add(p1);
    }
+   
+   public void getPaid(Double amount) {
+	   while ( (this.accountBalance + amount) > Admin.getMaxLimit()) {
+		   amount -= 0.01;
+		   overdue += 0.01;
+	   }
+	   this.accountBalance += amount;
+   }
+   
+   public void removeFunds(Double amount, Double overdue) {
+	      if (this.accountBalance - amount >= 0.0) {
+	         this.accountBalance -= amount;
+	      }
+	      if (overdue > 0.0){
+	    	 while ( (this.accountBalance + amount) <= Admin.getMaxLimit()) {
+	    		 amount -= 0.01;
+	    		 this.accountBalance += 0.01;
+	    	 }
+	    	  
+	      }
+
+	   }
 	   
    /*public void addProduct(Product product) {
       if (this.products.size() < Admin.getMaxProducts()) {

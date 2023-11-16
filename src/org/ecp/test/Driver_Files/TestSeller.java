@@ -1,8 +1,8 @@
 package org.ecp.test.Driver_Files;
 
-import org.ecp.items.Product;
+//import org.ecp.items.Product;
 import org.ecp.people.Seller;
-import org.ecp.system.Admin;
+//import org.ecp.system.Admin;
 
 public class TestSeller {
 
@@ -10,7 +10,7 @@ public class TestSeller {
 
         
     	Seller s1 = new Seller();
-    	Product p1 = new Product();
+    	//Product p1 = new Product();
     	//Admin a1 = new Admin();
     	s1.addProduct();
     	s1.addProduct();
@@ -24,11 +24,9 @@ public class TestSeller {
     	//testing product removal
     	s1.beginRemoveProduct();
     	s1.printProductList();
-    	int z = 0;
-    	while( z == 0) {
-	    	s1.beginUpdateProduct();
-	    	s1.printProductList();
-    	}
+    	
+    	s1.beginUpdateProduct();
+	    s1.printProductList();
     	
     	/*
     	// Create a Seller

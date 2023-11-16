@@ -78,11 +78,11 @@ public class Admin {
 	   //if(this.getUserList().contains(user_A))
 	   for(User x: this.getUserList()) {
 		   if(x.getUsername().equals(username) ) {
-			   System.out.println("Username: " + x.getUsername() + " already exists.\nRe enter username");
+			   System.out.println("Username: " + x.getUsername() + " already exists.");
 			   return true;
 		   }
 		   if(x.getEmail().equals(email) ) {
-			   System.out.println("Email: " + x.getEmail() + " already exists.\nRe enter email");
+			   System.out.println("Email: " + x.getEmail() + " already exists.");
 			   return true;
 		   }
 	   }
@@ -97,9 +97,9 @@ public class Admin {
    
    public static void printSellers() {
 	   for(User x: userList) { 
-		if(x instanceof Seller) {
-		System.out.println(x.getUsername());   
-		}
+		   if(x instanceof Seller) {
+			   System.out.println(x.getUsername());  
+		   }
 	   }
    }
    
