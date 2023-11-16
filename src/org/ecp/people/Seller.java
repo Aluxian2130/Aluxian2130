@@ -10,7 +10,7 @@ public class Seller extends User {
    //private Product p1;
    //private Admin a1 = new Admin();
 
-   Seller() {
+   public Seller() {
 	   products = new ArrayList<Product>();
    }
 

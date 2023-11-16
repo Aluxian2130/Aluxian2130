@@ -15,7 +15,7 @@ public class TestDriver {
         driver.setDeliveryList(Admin.getDeliveryList());
 
         // Add delivery
-        driver.addDelivery();
+        driver.beginAddDelivery();
 
         // Remove a delivery
         String orderToRemove = "John Doe"; // Replace with the actual order name
