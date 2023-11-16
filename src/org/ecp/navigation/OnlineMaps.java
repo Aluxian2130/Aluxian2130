@@ -13,11 +13,11 @@ public class OnlineMaps {
       }
    }
 
-   public void addAddress(String address) {
+   public static void addAddress(String address) {
       OnlineMaps.addressList.add(address);
    }
    
-   public void setAddressList(ArrayList<String> addresses) {
+   public static void setAddressList(ArrayList<String> addresses) {
 	      OnlineMaps.addressList = addresses;
    }
    
@@ -36,11 +36,11 @@ public class OnlineMaps {
        for (Integer i = 0; i < num; i++) {
     	   Scanner myObj2 = new Scanner(System.in);
            String address = myObj.nextLine();
-    	   this.addAddress(address);
+    	   OnlineMaps.addAddress(address);
        }
    }
    
-   public void removeAddress() {
+   public static void removeAddress() {
 	   System.out.println("Enter an address to remove: ");
 	   Scanner myObj = new Scanner(System.in);
        String address = myObj.nextLine();
@@ -53,7 +53,7 @@ public class OnlineMaps {
 	   
    }
    
-   public void printAddressList() {
+   public static void printAddressList() {
 	   Integer numAddr = addressList.size();
 	   for (Integer i = 0; i < numAddr; i++) {
 		   if (i == numAddr - 1) { System.out.println(addressList.get(i)); }
