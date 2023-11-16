@@ -59,16 +59,6 @@ public abstract class User {
 
    }
    
-   public Boolean emailMismatch(User u1) {
-	   for(User x: a1.getUserList()) {
-		   if(x.getEmail().equals(u1.getEmail()) || x.getUsername().equals(u1.getUsername())) {
-			   System.out.println("Email or username already exists.");
-			   return true;
-		   }
-	   }
-	   return false;
-   }
-   
    public void createAccount() {
 	   
 	   System.out.println("Enter email: ");

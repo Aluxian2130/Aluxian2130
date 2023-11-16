@@ -14,36 +14,38 @@ public class TestUser {
 
     public static void main(String[] args) {
 
-    	Admin a1 = new Admin();//to manage users
     	System.out.println("Creating sellers: ");
     	Seller s1 = new Seller();
-    	//Seller s2 = new Seller();
+    	Seller s2 = new Seller();
     	
     	s1.deleteAccount();
-    	/*
+    	
     	System.out.println("Creating customers: ");
     	Customer c1 = new Customer();
     	Customer c2 = new Customer();
     	Customer c3 = new Customer();
     	System.out.println("Sellers present in system: ");
-    	a1.printSellers();
+    	Admin.printSellers();
     	System.out.println("Customers present in system: ");
-    	a1.printCustomers();
+    	Admin.printCustomers();
     	
     	System.out.println("Users present in system: ");
-    	a1.printUsers();
+    	Admin.printUsers();
     	
     	System.out.println("Deleting customer account");
     	c2.deleteAccount();
     	System.out.println("Deleting seller account");
     	s2.deleteAccount();
-    	*/
+    	
     	
     	System.out.println("Print user list: ");
     	Admin.printUsers();
-    	//removing a customer
-    	//System.out.println(a1.getUsername());
+    	
     	/*
+    	//removing a customer
+    	
+    	System.out.println(a1.getUsername());
+    	
         // Create a Customer
         Customer customer = new Customer();
         customer.setUsername("customer123");
@@ -78,6 +80,6 @@ public class TestUser {
 //        System.out.println("Address: " + customer.getAddress());
 
         // Perform other customer-related actions as needed
-         */
+        */
     }
 }
