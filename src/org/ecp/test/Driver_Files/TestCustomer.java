@@ -10,10 +10,8 @@ public class TestCustomer {
 
         // Create a Customer
         Customer customer = new Customer();
-//        customer.setUsername("john_doe");
-//        customer.setEmail("john.doe@example.com");
-        customer.setAccountBalance(100.0);
-
+        Admin.setMaxLimit(100.0);
+        
         // Add some funds to the customer's account
         customer.addFunds(50.0);
 

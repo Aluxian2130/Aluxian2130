@@ -18,28 +18,23 @@ public class Customer extends User {
 	   orderedProducts = null;
    }
 
-   public void setAddress(String addressChosen) {
-       if (isValidString(addressChosen)) {
-           this.address = addressChosen;
-           System.out.println("Address set to: " + this.address);
-       } else {
-           System.out.println("Invalid address format!");
-       }
+   public void setAddress(String addressChosen) {//still need to fix this and chooseAddress
+      this.address = addressChosen;
    }
    
    public void chooseAddress(OnlineMaps location) {
 	   System.out.println("Choose an address from this list: ");
-	      System.out.println(location.getAddressList());
+	   System.out.println(location.getAddressList());
 	      
-	      Scanner myObj = new Scanner(System.in);
-	      String addressChosen = myObj.nextLine();
+	   Scanner myObj = new Scanner(System.in);
+	   String addressChosen = myObj.nextLine();
 	      
-	      if (location.getAddressList().contains(addressChosen)) {
-	    	 setAddress(addressChosen);
-	      } //check in setAddress;
-	      else {
-	    	  System.out.println("Entered an invalid address. ");
-	      }
+	   if (location.getAddressList().contains(addressChosen)) {
+		   setAddress(addressChosen);
+	   } //check in setAddress;
+	   else {
+		   System.out.println("Entered an invalid address. ");
+	   }
    }
 
    public String getAddress() {
@@ -55,15 +50,11 @@ public class Customer extends User {
    }
 
    public void addFunds(double amount) {
-	    if (amount > 0) { // Ensure the amount to add is positive
-	        this.accountBalance += amount;
-	        System.out.println("Funds added successfully. Current balance: " + this.accountBalance);
-	    } else {
-	        System.out.println("Invalid amount. Please provide a positive amount to add.");
-	    }
-	}
+      if ((amount > 0) && (this.accountBalance + amount <= Admin.getMaxLimit())) {
+         this.accountBalance += amount;
+      }
 
-
+   }
 
    public void addProduct(Product product) {
       Scanner myObj = new Scanner(System.in);
@@ -105,7 +96,7 @@ public class Customer extends User {
    public void completePayment() {
 	   orderedProducts.setCustomerName(this.username);
 	   orderedProducts.setCustomerAddress(this.address);
-	   orderedProducts.setStatus("Shipped"); //waiting for driver
+	   orderedProducts.setStatus("Waiting for driver."); 
 	   orderedProducts.setDate(1); //CHANGE TO ADD CURRENT DATE (DATE OR TIMESTAMP ORDER IS PLACED)
 	   Admin.getDeliveryList().add(orderedProducts);
    }
@@ -132,11 +123,7 @@ public class Customer extends User {
 
    public void submitComplaint() {
    }
-   private boolean isValidString(String input) {
-       // Add your logic here to validate the address as a string
-       // For a simple check, you can ensure that the input is not empty
-       return input != null && !input.trim().isEmpty();
-   }
+
    
 }
 
