@@ -10,7 +10,6 @@ import org.ecp.system.Admin;
 public class Driver extends User {
    private ArrayList<Order> deliveries;
 
-
    public Driver() {
 	   deliveries = new ArrayList<Order>();
    }
@@ -22,28 +21,33 @@ public class Driver extends User {
    public ArrayList<Order> getDeliveryList() {
       return deliveries;
    }
+   
+   public void beginAddDelivery() {
+	   System.out.println("Choose an order to deliver by entering corresponding Customer's name: ");
+	   System.out.println(Admin.getDeliveryList());
 
-   public void addDelivery() {
-	  System.out.println("Choose an order to deliver by entering Customer's name: ");
-	  System.out.println(Admin.getDeliveryList());
-	      
-	  Scanner myObj = new Scanner(System.in);
-	  String orderChosen = myObj.nextLine();
-      if (deliveries.size() <= Admin.getMaxDeliveries()) {
-    	  for (Order order : Admin.getDeliveryList()) {
-    		  if (order.getCustomerName() == orderChosen) {
-     	         this.deliveries.add(order);
-     	         order.setStatus("In delivery");
-    		  }
-    		  else {
-        		  System.out.println("This name does not match an order in the given list.");
-        	  }
-    	  }
-    	  
-      }
-      else {
-    	  System.out.println("You have reached maximum number of allowed deliveries. ");
-      }
+	   Scanner myObj = new Scanner(System.in);
+	   String orderChosen = myObj.nextLine();
+	   
+	   if (deliveries.size() <= Admin.getMaxDeliveries()) {
+		   this.addDelivery(orderChosen);
+	   }
+	   else {
+		   System.out.println("You have reached maximum number of allowed deliveries. ");
+	   }
+   }
+   
+   public void addDelivery(String customerName) {
+	   for (Order order : Admin.getDeliveryList()) {
+ 		  if (order.getCustomerName() == customerName) {
+  	         this.deliveries.add(order);
+  	         order.setStatus("In delivery");
+ 		  }
+ 		  else {
+     		  System.out.println("This name does not match an order in the given list.");
+     	  }
+ 	  }
+      
 
    }
 
@@ -71,16 +75,8 @@ public class Driver extends User {
 	         Admin.getDeliveryList().remove(order);
 	         this.deliveries.remove(order);
 	         //add to customer's order history list
-	      }
+	  }
    }
 
-   public void createAccount() {
-	   
-   }
-
-   @Override
-   public void addProduct(Product var1) { } // Technically should not exist in driver. Added so driver class does not have to be abstract for now. 
-   @Override
-   public void removeProduct(Product var1) { } // Technically should not exist in driver. Added so driver class does not have to be abstract for now. 
 }
 

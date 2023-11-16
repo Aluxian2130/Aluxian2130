@@ -1,7 +1,5 @@
 package org.ecp.people;
 
-import org.ecp.items.Product;
-
 public abstract class User {
    protected String email = "unknown";
    protected String password = "unknown";
@@ -54,13 +52,12 @@ public abstract class User {
 
    }
 
-   public abstract void createAccount();
-
-   public abstract void addProduct(Product var1);
-
-   public abstract void removeProduct(Product var1);
+   public void createAccount() {
+	   
+   }
 
    protected void deleteAccount() {
+	   
    }
 
    protected void login() {
@@ -68,5 +65,6 @@ public abstract class User {
 
    protected void logout() {
    }
+   
 }
 

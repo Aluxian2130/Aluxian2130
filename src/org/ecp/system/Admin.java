@@ -8,19 +8,68 @@ import org.ecp.people.User;
 public class Admin {
    private static double maxLimit;
    private static Integer maxProducts;
+   private static Integer maxDeliveries;
    private ArrayList<Product> itemDirectory;
    private static ArrayList<Order> deliveryList;
    private ArrayList<User> userList;
 
-   
-   public Admin() {
-	  maxProducts = 2;
+   Admin() {
       maxLimit = 0.0D;
+      maxProducts = 10;
+      maxDeliveries = 5;
       itemDirectory = new ArrayList<Product>();
       deliveryList = new ArrayList<Order>();
       userList = new ArrayList<User>();
    }
+
+   public void setMaxLimit(double maxLimit) {
+      Admin.maxLimit = maxLimit;
+   }
    
+   public static double getMaxLimit() {
+      return maxLimit;
+   }
+
+   public static void setMaxProducts(Integer maxProducts) {
+      Admin.maxProducts = maxProducts;
+   }
+   
+   public static Integer getMaxProducts() {
+      return maxProducts;
+   }
+   
+   public static void setMaxDeliveries(Integer maxDeliveries) {
+	  Admin.maxDeliveries = maxDeliveries;
+   }
+   
+   public static Integer getMaxDeliveries() {
+	  return maxDeliveries;
+   }
+
+   public void setItemDirectory(ArrayList<Product> itemDirectory) {
+      this.itemDirectory = itemDirectory;
+   }
+   
+   public ArrayList<Product> getItemDirectory() {
+      return itemDirectory;
+   }
+
+   public void setDeliveryList(ArrayList<Order> deliveryList) {
+      Admin.deliveryList = deliveryList;
+   }
+   
+   public static ArrayList<Order> getDeliveryList() {
+      return deliveryList;
+   }
+
+   public void setUserList(ArrayList<User> userList) {
+      this.userList = userList;
+   }
+
+   public ArrayList<User> getUserList() {
+      return userList;
+   }
+
    public Boolean detectSignupConflict(String email, String username, String password) {
 	   //if(this.getUserList().contains(user_A))
 	   for(User x: this.getUserList()) {
@@ -41,51 +90,7 @@ public class Admin {
 	   
 	   return false;
    }
-
-
-   public void setMaxLimit(double maxLimit) {
-      Admin.maxLimit = maxLimit;
-   }
-
-   public static double getMaxLimit() {
-      return maxLimit;
-   }
-
-   public static void setMaxProducts(Integer maxProducts) {
-      Admin.maxProducts = maxProducts;
-   }
-
-   public static Integer getMaxProducts() {
-      return maxProducts;
-   }
-
-   public void setItemDirectory(ArrayList<Product> itemDirectory) {
-      this.itemDirectory = itemDirectory;
-   }
-
-   public ArrayList<Product> getItemDirectory() {
-      return itemDirectory;
-   }
-
-   public void setDeliveryList(ArrayList<Order> deliveryList) {
-      Admin.deliveryList = deliveryList;
-   }
-
-   public static ArrayList<Order> getDeliveryList() {
-      return deliveryList;
-   }
-
-   public void setUserList(ArrayList<User> userList) {
-      this.userList = userList;
-   }
-
-   public ArrayList<User> getUserList() {
-      return userList;
-   }
-   public static int getMaxDeliveries() {
-       return 8; // Change 10 to your desired maximum number of deliveries
-   }
-
+   
    public boolean checkAccount() {
       return false;
    }
