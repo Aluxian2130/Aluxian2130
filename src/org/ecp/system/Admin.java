@@ -26,7 +26,7 @@ public class Admin {
       //userList = new ArrayList<User>();
    }
 
-   public void setMaxLimit(double maxLimit) {
+   public static void setMaxLimit(double maxLimit) {
       Admin.maxLimit = maxLimit;
    }
    
