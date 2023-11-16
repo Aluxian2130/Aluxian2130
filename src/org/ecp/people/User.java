@@ -2,7 +2,7 @@ package org.ecp.people;
 
 import java.util.Scanner;
 
-import org.ecp.items.Product;
+//import org.ecp.items.Product;
 import org.ecp.system.Admin;
 
 public abstract class User {
@@ -19,7 +19,13 @@ public abstract class User {
        accountBalance = 0.0;
        this.createAccount();
    }
-
+   public User(String email, String password, String username, double accountBalance) {
+	   this.email = email;
+	   this.password = password;
+	   this.username = username;
+	   this.accountBalance = accountBalance;
+   }
+   
    public void setEmail(String email) {
       this.email = email;
    }
@@ -61,26 +67,30 @@ public abstract class User {
    
    public void createAccount() {
 	   
-	   System.out.println("Enter email: ");
-	   Scanner myObj = new Scanner(System.in);
-	   this.email = myObj.nextLine();
-	   
-	   System.out.println("Enter username: ");
-	   this.username = myObj.nextLine();
-	   
-	   System.out.println("Enter password: ");
-	   this.password = myObj.nextLine();
-	   
-	   //System.out.println("ADDED");
-	   //if(this.emailMismatch(this) != false) {
-	   if(a1.detectSignupConflict(email, username, password) == false) {
-		   a1.getUserList().add(this);
+	   if ((this.email == "unknown")&&(this.password == "unknown")&&(this.username == "unknown")) {
+		   System.out.println("Enter email: ");
+		   Scanner myObj = new Scanner(System.in);
+		   this.email = myObj.nextLine();
+		   
+		   System.out.println("Enter username: ");
+		   this.username = myObj.nextLine();
+		   
+		   System.out.println("Enter password: ");
+		   this.password = myObj.nextLine();
+		   
+		   //System.out.println("ADDED");
+		   //if(this.emailMismatch(this) != false) {
+		   if(a1.detectSignupConflict(email, username, password) == false) {
+			   a1.getUserList().add(this);
+		   }
+		   else {
+			   this.email = "unknown";
+			   this.password = "unknown";
+			   this.username = "unknown";
+		   }
 	   }
-	   else {
-		   this.email = "unknown";
-		   this.password = "unknown";
-		   this.username = "unknown";
-	   }
+	   else {}
+	   
 	   //System.out.println("meh: " + a1.getUserList().get(0).getUsername());
    }
 

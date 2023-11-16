@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OnlineMaps {
-	private static ArrayList<String> addressList;
+	private static ArrayList<String> addressList = new ArrayList<String>();
 
    public OnlineMaps() {
       addressList = new ArrayList<String>();
