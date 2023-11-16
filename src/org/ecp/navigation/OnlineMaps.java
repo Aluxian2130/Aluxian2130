@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OnlineMaps {
-   private ArrayList<String> addressList;
+	private static ArrayList<String> addressList;
 
    public OnlineMaps() {
       addressList = new ArrayList<String>();
@@ -14,18 +14,18 @@ public class OnlineMaps {
    }
 
    public void addAddress(String address) {
-      this.addressList.add(address);
+      OnlineMaps.addressList.add(address);
    }
    
    public void setAddressList(ArrayList<String> addresses) {
-	      this.addressList = addresses;
+	      OnlineMaps.addressList = addresses;
    }
    
    public void enterAddress() {
 	   System.out.println("Enter address to add to OnlineMaps list: ");
        Scanner myObj = new Scanner(System.in);
        String address = myObj.nextLine();
-	   this.addAddress(address);
+       addAddress(address);
    }
    
    public void initAddressList() {
@@ -44,8 +44,8 @@ public class OnlineMaps {
 	   System.out.println("Enter an address to remove: ");
 	   Scanner myObj = new Scanner(System.in);
        String address = myObj.nextLine();
-       if (this.addressList.contains(address)) {
-		   this.addressList.remove(address);
+       if (OnlineMaps.addressList.contains(address)) {
+		   OnlineMaps.addressList.remove(address);
 	   }
 	   else {
 		   System.out.println("This address does not exist.");

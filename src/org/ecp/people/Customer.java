@@ -11,6 +11,7 @@ public class Customer extends User {
    private String address;
    private ArrayList<Product> shoppingCart;
    private Order orderedProducts;
+   private OnlineMaps om = new OnlineMaps();
 
    public Customer() {
 	   address = "unknown";
@@ -18,8 +19,9 @@ public class Customer extends User {
 	   orderedProducts = null;
    }
 
-   public void setAddress(String addressChosen) {//still need to fix this and chooseAddress
-      this.address = addressChosen;
+   public void setAddress(String addressChosen) {
+      if (om.getAddressList().contains(addressChosen)) { this.address = addressChosen; }
+      else { System.out.println("This address does not exist in the list."); }
    }
    
    public void chooseAddress(OnlineMaps location) {
