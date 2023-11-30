@@ -70,7 +70,7 @@ public class Admin {
       Admin.userList = userList;
    }
 
-   public ArrayList<User> getUserList() {
+   public static ArrayList<User> getUserList() {
       return userList;
    }
 
