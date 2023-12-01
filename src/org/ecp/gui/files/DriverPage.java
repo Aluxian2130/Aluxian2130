@@ -38,6 +38,8 @@ public class DriverPage {
         frame.setLayout(null);
         frame.setVisible(true);
     }
+    
+    
     // This is here for debugging and coding purposes. Remove for final deliverable.
     public static void main(String[] args) {
         // Instantiate DriverPage and see the GUI
