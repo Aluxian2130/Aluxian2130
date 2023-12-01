@@ -1,10 +1,11 @@
 package org.ecp.test.Driver_Files;
-import org.ecp.gui.files.HomePage;
+import org.ecp.gui.files.GUI;
+import org.ecp.system.Admin;
 
 public class DriverGUI {
 	public static void main(String[] args)
 	{
-		HomePage home = new HomePage("HomePage GUI");    
+		GUI login = new GUI("Login_GUI");    
 	}
 }
 
