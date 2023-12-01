@@ -9,6 +9,7 @@ public abstract class User {
    protected String email = "unknown";
    protected String password = "unknown";
    protected String username;
+   protected String accountType;
    protected double accountBalance;
    private Admin a1 = new Admin();
 
@@ -16,6 +17,7 @@ public abstract class User {
 	   email = "unknown";
 	   password = "unknown";
 	   username = "unknown";
+	   accountType = "unknown";
        accountBalance = 0.0;
        this.createAccount();
    }
@@ -25,6 +27,15 @@ public abstract class User {
 	   this.username = username;
 	   this.accountBalance = accountBalance;
    }
+   
+   public User(String email, String password, String username, String accountType, double accountBalance) {
+	   this.email = email;
+	   this.password = password;
+	   this.username = username;
+	   this.accountType = accountType;
+	   this.accountBalance = accountBalance;
+   }
+
    
    public void setEmail(String email) {
       this.email = email;
@@ -49,6 +60,14 @@ public abstract class User {
    public String getUsername() {
       return username;
    }
+   
+   public void setAccountType(String accountType) {
+	  this.accountType = accountType;
+   }
+
+   public String getAccountType() {
+	  return accountType;
+   }
 
    public void setAccountBalance(double accountBalance) {
       this.accountBalance = accountBalance;
@@ -66,31 +85,29 @@ public abstract class User {
    }
    
    public void createAccount() {
+	   System.out.println("Enter email: ");
+	   Scanner myObj = new Scanner(System.in);
+	   this.email = myObj.nextLine();
 	   
-	   if ((this.email == "unknown")&&(this.password == "unknown")&&(this.username == "unknown")) {
-		   System.out.println("Enter email: ");
-		   Scanner myObj = new Scanner(System.in);
-		   this.email = myObj.nextLine();
-		   
-		   System.out.println("Enter username: ");
-		   this.username = myObj.nextLine();
-		   
-		   System.out.println("Enter password: ");
-		   this.password = myObj.nextLine();
-		   
-		   //System.out.println("ADDED");
-		   //if(this.emailMismatch(this) != false) {
-		   if(a1.detectSignupConflict(email, username, password) == false) {
-			   a1.getUserList().add(this);
-		   }
-		   else {
-			   this.email = "unknown";
-			   this.password = "unknown";
-			   this.username = "unknown";
-		   }
+	   System.out.println("Enter username: ");
+	   this.username = myObj.nextLine();
+	   
+	   System.out.println("Enter password: ");
+	   this.password = myObj.nextLine();
+	   
+	   System.out.println("Enter account type");
+	   this.accountType = myObj.nextLine();
+	   //System.out.println("ADDED");
+	   //if(this.emailMismatch(this) != false) {
+	   if(Admin.detectSignupConflict(email, username, password, accountType) == false) {
+		   Admin.getUserList().add(this);
 	   }
-	   else {}
-	   
+	   else {
+		   this.email = "unknown";
+		   this.password = "unknown";
+		   this.accountType = "unknown";
+		   this.username = "unknown";
+	   }
 	   //System.out.println("meh: " + a1.getUserList().get(0).getUsername());
    }
 
@@ -100,6 +117,7 @@ public abstract class User {
 		   email = "unknown";
 		   password = "unknown";
 		   username = "unknown";
+		   accountType = "unknown";
 	       accountBalance = 0.0;
 	   }
 	   else {
