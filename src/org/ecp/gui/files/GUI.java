@@ -7,6 +7,9 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import org.ecp.people.Customer;
+import org.ecp.people.Driver;
+import org.ecp.people.Seller;
 import org.ecp.people.User;
 import org.ecp.system.Admin;
 
@@ -122,100 +125,170 @@ public class GUI extends JFrame implements ActionListener{
 			messageLabel.setForeground(new java.awt.Color(211,84,0));
 			messageLabel.setText("Please fill out all fields first.");
 		}
-		else if (e.getSource() == login) { handleLogin(); }
-		else if (e.getSource() == signup) { handleSignup(); }
-		else if (e.getSource() == quit) { System.exit(0); }
+		else if (e.getSource() == login) { 
+			handleLogin(); 
+			}
+		else if (e.getSource() == signup) { 
+			handleSignup(); 
+			}
+		else if (e.getSource() == quit) { 
+			System.exit(0); 
+			}
 		
 	}
 	
 	
 	private void handleLogin() {
-		if (valid == 1) { 
-			System.exit(0);
-			homePage(accountValid());
-		}
+		//if (valid == 1) { 
+		//	homePage(accountValid());
+			//System.exit(0); //COMMENT OUT FOR NOW
+		//}
 		if (Admin.getUserList().isEmpty() == true) {
 			messageLabel.setForeground(new java.awt.Color(231,76,60));
 			messageLabel.setText("EMPTY USERLIST (login)");
 		}
-		for (User u : Admin.getUserList()) {
-			if (u.getUsername() == username) {
-				if(u.getPassword() == password) {
+		else {
+				
+				if(this.allFieldMatch() == 1) {
 					messageLabel.setForeground(new java.awt.Color(46,204,113));
-					messageLabel.setText("Login successful.");
-					
-					if (u.getEmail() == email) {
-						if (accountValid() != 0) {
-							if (u.getAccountType() == accountType) {
-								homePage(accountValid());
-							}
-							else{
-								messageLabel.setForeground(new java.awt.Color(211,84,0));
-								messageLabel.setText("Incorrect account type.");
-							}
-						}
-					}
-					else {
-						messageLabel.setForeground(new java.awt.Color(211,84,0));
-						messageLabel.setText("Incorrect email.");
-					}
+					messageLabel.setText("Login successful");
+				}
+				else if(this.detectUsername_Password_Email_Match() == 0   ) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("Username and Password combination does not match");
+				}
+				else  if(this.detectUsername_Email_Match() != 2) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("Email does not exist. Use Valid Email or Click Sign Up");
 				}
 				else {
-					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Incorrect password.");
+					//messageLabel.setForeground(new java.awt.Color(211,84,0));
+					//messageLabel.setText("RANDOM BEHAVIOUR");
 				}
-			}
-			else {
-				messageLabel.setForeground(Color.red);
-				messageLabel.setText("Error: This user does not exist. Please click Sign up.");
-			}
+				//////	
 		}
-		
 		
 	}
-	private void handleSignup() {
-		if (Admin.getUserList().isEmpty() == true) {
-			messageLabel.setForeground(new java.awt.Color(231,76,60));
-			messageLabel.setText("EMPTY USERLIST (signup)");
-		}
+	
+	public Integer detectUsername_Email_Match() {
+		Integer x = 0;
 		for (User u : Admin.getUserList()) {
-			if (u.getUsername().equals(username)) {
-				messageLabel.setForeground(new java.awt.Color(211,84,0));
-				messageLabel.setText("This username is already taken.");
+			if(u.getUsername().equals(username)) {
+				x = 1;
 			}
-			else {
-				if (u.getEmail() == email) {
+			if(u.getEmail().equals(email)) {
+				x = 2;
+			}
+		}
+		return x;
+	}
+	
+	public Integer detectUsername_Password_Email_Match() {
+		Integer x = 0;
+		for (User u : Admin.getUserList()) {
+			if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
+				x = 1;
+			}
+		}
+		return x;
+	}
+	
+	public Integer allFieldMatch() {
+		Integer x = 0;
+		System.out.println("\nLOGGIN IN");
+		for (User u : Admin.getUserList()) {
+			if(u.getUsername().equals(username) && u.getEmail().equals(email) && u.getPassword().equals(password) && u.getAccountType().equals(accountType)) {
+				x = 1;
+			}
+			System.out.println("User name: "  + u.getEmail() + " Username: " +  u.getUsername() + " Password: " + u.getPassword() + " CUSTOMER!");
+		}
+		
+		return x;
+	}
+	
+	private void handleSignup() {
+		Boolean flag1 = false;
+		if (Admin.getUserList().isEmpty() == true) {
+			if (accountValid() != 0 && (this.detectUsername_Email_Match() == 0)) {		
+				//if (!emailValid()) {
+				//	messageLabel.setForeground(new java.awt.Color(211,84,0));
+				//	messageLabel.setText("Invalid email.");
+				//}
+				if (password.contains(" ")) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("ERROR: Password cannot contain spaces");
+				}
+				else if (password.length() <= 5) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("ERROR: Password cannot be shorter than 6 characters");
+				}
+				else {
+					flag1 = true;
+				}
+			}
+		}
+		else {
+			for (User u : Admin.getUserList()) {
+				if (this.detectUsername_Email_Match() == 1) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("This username is already taken.");
+				}
+				else if(this.detectUsername_Email_Match() == 2) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
 					messageLabel.setText("This email is already taken.");
 				}
-				else {
-					if (accountValid() != 0) {
-						if (!emailValid()) {
-							messageLabel.setForeground(new java.awt.Color(211,84,0));
-							messageLabel.setText("Invalid email.");
-						}
-						else if (password.contains(" ")) {
-							messageLabel.setForeground(new java.awt.Color(211,84,0));
-							messageLabel.setText("ERROR: Password cannot contain spaces");
-						}
-						else if (password.length() <= 5) {
-							messageLabel.setForeground(new java.awt.Color(211,84,0));
-							messageLabel.setText("ERROR: Password cannot be shorter than 6 characters");
-						}
-						u.setEmail(email);
-						u.setPassword(password);
-						u.setUsername(username);
-						u.setAccountType(accountType);
-						userlist.add(u);
-						Admin.getUserList().add(u);
-						messageLabel.setForeground(new java.awt.Color(46,204,113));
-						messageLabel.setText("Successfully created account."); 
-						valid = 1;
-						//homePage(accountValid());
+				else if (accountValid() != 0 && (this.detectUsername_Email_Match() == 0) ) {
+							//if (!emailValid()) {
+							//	messageLabel.setForeground(new java.awt.Color(211,84,0));
+							//	messageLabel.setText("Invalid email.");
+							//}
+							if (password.contains(" ")) {
+								messageLabel.setForeground(new java.awt.Color(211,84,0));
+								messageLabel.setText("ERROR: Password cannot contain spaces");
+							}
+							else if (password.length() <= 5) {
+								messageLabel.setForeground(new java.awt.Color(211,84,0));
+								messageLabel.setText("ERROR: Password cannot be shorter than 6 characters");
+							}
+							else {
+								flag1 = true;
+							}
+							//homePage
+							//homePage(accountValid());
 					}
 				}	
-			}	
-				
+		}
+		
+		if(flag1 == true) {
+			User user_X = new Customer();
+			if (accountValid() == 2){
+				 user_X  = new Driver(); 
+			}
+			else if (accountValid() == 3) {
+				user_X = new Seller();
+			}
+			user_X.setEmail(email);
+			user_X.setPassword(password);
+			user_X.setUsername(username);
+			user_X.setAccountType(accountType);	
+			userlist.add(user_X);
+			Admin.getUserList().add(user_X);
+			messageLabel.setForeground(new java.awt.Color(46,204,113));
+			messageLabel.setText("Your " + accountType + " account has been created."); 
+			valid = 1;
+		}
+		flag1 = false;
+		System.out.println("\nTESTING 12_1");
+		for (User a : Admin.getUserList()) {
+				if(a instanceof Customer) {
+					System.out.println("User name: "  + a.getEmail() + " Username: " +  a.getUsername() + " Password: " + a.getPassword() + " CUSTOMER!");
+				}
+				else if (a instanceof Seller) {
+					System.out.println("User name: "  + a.getEmail() + " Username: " +  a.getUsername() + " Password: " + a.getPassword() + " SELLER!");
+				}
+				else if (a instanceof Driver) {
+					System.out.println("User name: "  + a.getEmail() + " Username: " +  a.getUsername() + " Password: " + a.getPassword() + " DRIVER!");
+				}
 		}
 	}
 	
@@ -228,9 +301,15 @@ public class GUI extends JFrame implements ActionListener{
 	}
 	
 	private Integer accountValid() {
-		if (accountType == "Customer" || accountType == "customer") { return 1; }
-		else if (accountType == "Driver" || accountType == "driver"){ return 2; }
-		else if (accountType == "Seller" || accountType == "seller") { return 3; }
+		if (accountType.equals("Customer") || accountType.equals("customer") ) { 
+			return 1; 
+			}
+		else if (accountType.equals("Driver") || accountType.equals("driver")){
+			return 2; 
+			}
+		else if (accountType.equals("Seller") || accountType.equals("seller")) {
+			return 3; 
+			}
 		else {
 			messageLabel.setForeground(new java.awt.Color(211,84,0));
 			messageLabel.setText("Account Type options: Customer; Driver; Seller");
@@ -267,10 +346,7 @@ public class GUI extends JFrame implements ActionListener{
 		for (int l = 0; l < k - 1; l++) {
 			if ((email.charAt(l) == '.') && (email.charAt(l+1) == '.')) {  return false;}
 		}
-		
-		
 		return true;
-		
 	}
 
 
