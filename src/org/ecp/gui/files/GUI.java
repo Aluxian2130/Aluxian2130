@@ -65,7 +65,7 @@ public class GUI extends JFrame implements ActionListener{
 		TitleLabel.setBounds(20,10,300,30);
 		TitleLabel.setFont(new Font("serif", Font.BOLD, 25));
 		TitleLabel.setForeground(new java.awt.Color(211,84,0));
-		messageLabel.setBounds(70,325,300,25);
+		messageLabel.setBounds(70,325,400,25);
 		messageLabel.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
 		messageLabel.setForeground(new java.awt.Color(244,246,246));
 		instr1Label.setBounds(70,365,300,25);
@@ -113,12 +113,22 @@ public class GUI extends JFrame implements ActionListener{
 		frame.setLayout(null);
 		frame.setVisible(true);
 	}
+	
+	public static final String capitalize(String str)   
+	{  
+		if (str == null || str.length() == 0) return str;  
+		return str.substring(0, 1).toUpperCase() + str.substring(1);  
+	
+	}  
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		username = userField.getText();
 		password = String.valueOf(passField.getPassword());
-		accountType = typeField.getText();
+		accountType = typeField.getText().toLowerCase();
+		accountType = this.capitalize(accountType);
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWW: " + accountType);
 		email = emailField.getText();
 		if (((e.getSource() == login)||(e.getSource() == signup))&&((username.length() == 0)||
 				(password.length() == 0)||(accountType.length() == 0)||(email.length() == 0))) {
@@ -148,14 +158,22 @@ public class GUI extends JFrame implements ActionListener{
 			messageLabel.setText("EMPTY USERLIST (login)");
 		}
 		else {
-				
+			if(this.accountValid() != 0) {
 				if(this.allFieldMatch() == 1) {
 					messageLabel.setForeground(new java.awt.Color(46,204,113));
 					messageLabel.setText("Login successful");
 				}
-				else if(this.detectUsername_Password_Email_Match() == 0   ) {
+				else if(this.detectUsername_Password_Match() == 0 && this.allFieldMatch() != 1 ) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Username and Password combination does not match");
+					messageLabel.setText("Username and Password combination does not match for this " + accountType + " account");
+				}
+				else if(this.detectUsername_Password_Email_Match() == 0 && this.detectUsername_Password_Match() == 1 ) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("Email does not match");
+				}
+				else if(this.detect_AccountType_Match() == 1) {
+					messageLabel.setForeground(new java.awt.Color(211,84,0));
+					messageLabel.setText("Account type: " + accountType + " does not exist for this user. Choose another");
 				}
 				else  if(this.detectUsername_Email_Match() != 2) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -165,12 +183,22 @@ public class GUI extends JFrame implements ActionListener{
 					//messageLabel.setForeground(new java.awt.Color(211,84,0));
 					//messageLabel.setText("RANDOM BEHAVIOUR");
 				}
-				//////	
+			}
 		}
 		
 	}
 	
-	public Integer detectUsername_Email_Match() {
+	public Integer detect_AccountType_Match() {//good
+		Integer x = 0;
+		for (User u : Admin.getUserList()) {
+			if(u.getUsername().equals(username) && u.getEmail().equals(email) && u.getPassword().equals(password) && !u.getAccountType().equals(accountType)) {
+				x = 1;
+			}
+		}
+		return x;
+	}
+	//user for sign up
+	public Integer detectUsername_Email_Match() {//good
 		Integer x = 0;
 		for (User u : Admin.getUserList()) {
 			if(u.getUsername().equals(username)) {
@@ -183,10 +211,20 @@ public class GUI extends JFrame implements ActionListener{
 		return x;
 	}
 	
-	public Integer detectUsername_Password_Email_Match() {
+	public Integer detectUsername_Password_Match() {//good
 		Integer x = 0;
 		for (User u : Admin.getUserList()) {
 			if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
+				x = 1;
+			}
+		}
+		return x;
+	}
+	
+	public Integer detectUsername_Password_Email_Match() {//to test
+		Integer x = 0;
+		for (User u : Admin.getUserList()) {
+			if(u.getUsername().equals(username) && u.getPassword().equals(password) && u.getEmail().equals(email)) {
 				x = 1;
 			}
 		}
@@ -198,9 +236,18 @@ public class GUI extends JFrame implements ActionListener{
 		System.out.println("\nLOGGIN IN");
 		for (User u : Admin.getUserList()) {
 			if(u.getUsername().equals(username) && u.getEmail().equals(email) && u.getPassword().equals(password) && u.getAccountType().equals(accountType)) {
+				if(accountType.equals("Customer")) {
+					CustomerPage cp = new CustomerPage(u);
+				}
+				else if(accountType.equals("Driver")) {
+					DriverPage dp = new DriverPage(u);
+				}
+				else if(accountType.equals("Seller")) {
+					SellerPage sp = new SellerPage(u);
+				}
 				x = 1;
 			}
-			System.out.println("User name: "  + u.getEmail() + " Username: " +  u.getUsername() + " Password: " + u.getPassword() + " CUSTOMER!");
+			System.out.println("User name: "  + u.getEmail() + " Username: " +  u.getUsername() + " Password: " + u.getPassword() + " " + u.getAccountType()  +" logged in!");
 		}
 		
 		return x;
@@ -292,11 +339,11 @@ public class GUI extends JFrame implements ActionListener{
 		}
 	}
 	
-	private void homePage(Integer i) {
+	private void homePage(Integer i, User user_A) {
 		switch(i) {
-			case 1: CustomerPage cp = new CustomerPage();
-			case 2: DriverPage dp = new DriverPage();
-			case 3: SellerPage sp = new SellerPage(); 
+			case 1: CustomerPage cp = new CustomerPage(user_A);
+			case 2: DriverPage dp = new DriverPage(user_A);
+			case 3: SellerPage sp = new SellerPage(user_A); 
 		}
 	}
 	
