@@ -24,9 +24,9 @@ public class TestSeller {
     	//testing product removal
     	s1.beginRemoveProduct();
     	s1.printProductList();
-    	
-    	s1.beginUpdateProduct();
-	    s1.printProductList();
+	    
+	s1.beginUpdateProduct();
+	s1.printProductList();
     	
     	/*
     	// Create a Seller

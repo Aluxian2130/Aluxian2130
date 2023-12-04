@@ -39,7 +39,10 @@ public class TestAll {
         Product p1 = new Product();
         s1.addProduct();
         s1.addProduct();
+<<<<<<< HEAD
         System.out.println("Detect error if seller attempts to add more products than defined maximum product amount.");
+=======
+>>>>>>> 26a11dfabbe78db3508702c9024722f1a3ca8fc9
         s1.addProduct();
         s1.printProductList();
         s1.beginRemoveProduct();
@@ -66,5 +69,11 @@ public class TestAll {
         s2.deleteAccount();
         System.out.println("Print user list: ");
         Admin.printUsers();
+<<<<<<< HEAD
+=======
+//        System.out.println("Checking out... ");
+//        customer.checkOut();
+        System.out.println("Current account balance: $" + customer.getAccountBalance());
+>>>>>>> 26a11dfabbe78db3508702c9024722f1a3ca8fc9
     }
 }

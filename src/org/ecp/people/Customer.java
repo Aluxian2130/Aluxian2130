@@ -65,7 +65,8 @@ public class Customer extends User {
       else if (this.accountBalance + amount > Admin.getMaxLimit()) {
     	  System.out.println("Amount exceeds account max limit. ");
       }
-      else { this.accountBalance += amount; }
+      else  
+    	  this.accountBalance += amount; 
 
    }
 
