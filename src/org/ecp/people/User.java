@@ -19,7 +19,7 @@ public abstract class User {
 	   username = "unknown";
 	   accountType = "unknown";
        accountBalance = 0.0;
-       this.createAccount();
+       //this.createAccount();
    }
    public User(String email, String password, String username, double accountBalance) {
 	   this.email = email;

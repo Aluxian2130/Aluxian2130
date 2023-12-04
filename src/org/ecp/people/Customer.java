@@ -18,6 +18,14 @@ public class Customer extends User {
 	   shoppingCart = new ArrayList<Product>();
 	   orderedProducts = null;
    }
+   public Customer(String email, String password, String username, String accountType, double accountBalance) {
+	   this.email = email;
+	   this.password = password;
+	   this.username = username;
+	   this.accountType = accountType;
+	   this.accountBalance = accountBalance;
+	   Admin.getUserList().add(this);
+   }
 
    public void setAddress(String addressChosen) {
       if (om.getAddressList().contains(addressChosen)) { this.address = addressChosen; }

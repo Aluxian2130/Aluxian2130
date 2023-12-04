@@ -58,7 +58,7 @@ public class CustomerPage extends JFrame implements ActionListener{
     	//Just as a Driver file to test CustomerPage
     	Admin.getUserList().clear();
     	Admin.getUserList().add(customer_1);
-    	Admin.getCustomerList().add(customer_1); //WHAT TO DO WITH THIS
+    	//Admin.getCustomerList().add(customer_1); //WHAT TO DO WITH THIS
 
     	//seller A and B
     	
