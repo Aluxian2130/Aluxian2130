@@ -58,7 +58,7 @@ public class CustomerPage extends JFrame implements ActionListener{
     	//Just as a Driver file to test CustomerPage
     	Admin.getUserList().clear();
     	Admin.getUserList().add(customer_1);
-    	//Admin.getCustomerList().add(customer_1); //WHAT TO DO WITH THIS
+    	Admin.getCustomerList().add(customer_1); //WHAT TO DO WITH THIS
 
     	//seller A and B
     	
@@ -148,11 +148,9 @@ public class CustomerPage extends JFrame implements ActionListener{
  				 
  			}
     	 else if (e.getSource() == cartBtn) { 
- 		 	System.out.println("Checkout");
- 		 	handleCheckoutDetails();
-				 
+ 		 		System.out.println("Checkout");
+ 		 		handleCheckoutDetails();	 
 			}
-		
 	}
     
     
@@ -160,6 +158,7 @@ public class CustomerPage extends JFrame implements ActionListener{
     
 	private void handleCheckoutDetails() {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -197,14 +196,14 @@ public class CustomerPage extends JFrame implements ActionListener{
 	     
 	     
 	     
-	     frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	     //frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	     frame3.getContentPane().setBackground(new java.awt.Color(40,55,71)); 
 	     frame3.setSize(450,400);
 	     frame3.setLayout(null);
 	     frame3.setVisible(true);
 	     
 		
-	     frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    // frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	     frame3.setVisible(true);
 	     
 		
@@ -269,7 +268,7 @@ public class CustomerPage extends JFrame implements ActionListener{
          });
         frame2.add(messageLabel);
         frame2.add(messageLabel);
-        frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
     // This is here for debugging and coding purposes. Remove for final deliverable.
