@@ -237,13 +237,34 @@ public class GUI extends JFrame implements ActionListener{
 		for (User u : Admin.getUserList()) {
 			if(u.getUsername().equals(username) && u.getEmail().equals(email) && u.getPassword().equals(password) && u.getAccountType().equals(accountType)) {
 				if(accountType.equals("Customer")) {
-					CustomerPage cp = new CustomerPage(u);
+					Customer customer_1 = new Customer();
+					customer_1.setEmail(u.getEmail());
+					customer_1.setUsername(u.getUsername());
+					customer_1.setPassword(u.getPassword());
+					customer_1.setAccountType(u.getAccountType());
+					//Admin.getCustomerList().add(customer_1);
+					
+					CustomerPage cp = new CustomerPage(customer_1);
 				}
 				else if(accountType.equals("Driver")) {
-					DriverPage dp = new DriverPage(u);
+					Driver d_1 = new Driver();
+					d_1.setEmail(u.getEmail());
+					d_1.setUsername(u.getUsername());
+					d_1.setPassword(u.getPassword());
+					d_1.setAccountType(u.getAccountType());
+					//Admin.getDriverList().add(d_1);
+					
+					DriverPage dp = new DriverPage(d_1);
 				}
 				else if(accountType.equals("Seller")) {
-					SellerPage sp = new SellerPage(u);
+					Seller s_1 = new Seller();
+					s_1.setEmail(u.getEmail());
+					s_1.setUsername(u.getUsername());
+					s_1.setPassword(u.getPassword());
+					s_1.setAccountType(u.getAccountType());
+					//Admin.getSellerList().add(s_1);
+					
+					SellerPage sp = new SellerPage(s_1);
 				}
 				x = 1;
 			}
@@ -339,6 +360,7 @@ public class GUI extends JFrame implements ActionListener{
 		}
 	}
 	
+	/*
 	private void homePage(Integer i, User user_A) {
 		switch(i) {
 			case 1: CustomerPage cp = new CustomerPage(user_A);
@@ -346,6 +368,7 @@ public class GUI extends JFrame implements ActionListener{
 			case 3: SellerPage sp = new SellerPage(user_A); 
 		}
 	}
+	*/
 	
 	private Integer accountValid() {
 		if (accountType.equals("Customer") || accountType.equals("customer") ) { 
