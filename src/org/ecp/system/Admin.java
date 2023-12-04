@@ -16,6 +16,9 @@ public class Admin {
    private static ArrayList<Order> deliveryList;
    //private ArrayList<User> userList;
    private static ArrayList<User> userList = new ArrayList<User>();
+   private static ArrayList<Customer> customerList = new ArrayList<Customer>();
+   private static ArrayList<Seller> sellerList = new ArrayList<Seller>();
+   private static ArrayList<Driver> driverList = new ArrayList<Driver>();
 
    public Admin() {
       maxLimit = 100.0;
@@ -72,6 +75,25 @@ public class Admin {
 
    public static ArrayList<User> getUserList() {
       return userList;
+   }
+   
+   public static ArrayList<Customer> getCustomerList() {
+       return customerList;
+   }
+   public static ArrayList<Driver> getDriverList() {
+       return driverList;
+   }
+   public static ArrayList<Seller> getSellerList() {
+	   return sellerList;
+   }
+   public void setCustomerList(ArrayList<Customer> customerList) {
+	   Admin.customerList = customerList;
+   }
+   public void setDriverList(ArrayList<Driver> driverList) {
+	   Admin.driverList = driverList;
+   }
+   public void setSellerList(ArrayList<Seller> sellerList) {
+	   Admin.sellerList = sellerList;
    }
 
    public static Boolean detectSignupConflict(String email, String username, String password, String accountType) {
