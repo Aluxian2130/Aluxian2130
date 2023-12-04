@@ -15,9 +15,6 @@ import org.ecp.system.Admin;
 
 public class GUI extends JFrame implements ActionListener{
 	private ArrayList<User> userlist = new ArrayList<>();
-	private Customer customer_X = new Customer();
-	private Driver driver_X = new Driver();
-	private Seller seller_X = new Seller();
 	String username, password, accountType, email;
 	Integer valid = 0;
 	char letter;
@@ -127,12 +124,21 @@ public class GUI extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		username = userField.getText();
+		
+		username = userField.getText().toLowerCase();
+		username = this.capitalize(username);
+
+		
 		password = String.valueOf(passField.getPassword());
+		
 		accountType = typeField.getText().toLowerCase();
 		accountType = this.capitalize(accountType);
-		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWW: " + accountType);
-		email = emailField.getText();
+		
+		email = emailField.getText().toLowerCase();
+		email = this.capitalize(email);
+
+		System.out.println("WWWWWWWWWWWWWWWWWWWWWWWWWWWW: " + email + " " + username + " " + password + " " + accountType);
+		
 		if (((e.getSource() == login)||(e.getSource() == signup))&&((username.length() == 0)||
 				(password.length() == 0)||(accountType.length() == 0)||(email.length() == 0))) {
 			messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -176,11 +182,11 @@ public class GUI extends JFrame implements ActionListener{
 				}
 				else if(this.detect_AccountType_Match() == 1) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Incorrect account type for this user.");
+					messageLabel.setText("Account type: " + accountType + " does not exist for this user. Choose another");
 				}
 				else  if(this.detectUsername_Email_Match() != 2) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Email does not exist.");
+					messageLabel.setText("Email does not exist. Use Valid Email or Click Sign Up");
 				}
 				else {
 					//messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -240,34 +246,29 @@ public class GUI extends JFrame implements ActionListener{
 		for (User u : Admin.getUserList()) {
 			if(u.getUsername().equals(username) && u.getEmail().equals(email) && u.getPassword().equals(password) && u.getAccountType().equals(accountType)) {
 				if(accountType.equals("Customer")) {
-					/*Customer customer_1 = new Customer();
-					customer_1.setEmail(u.getEmail());
-					customer_1.setUsername(u.getUsername());
-					customer_1.setPassword(u.getPassword());
-					customer_1.setAccountType(u.getAccountType());*/
-					//Admin.getCustomerList().add(customer_1);
 					
-					CustomerPage cp = new CustomerPage(customer_X);
+					//Admin.getCustomerList().add(customer_1);
+					CustomerPage cp = new CustomerPage(u.getEmail(), u.getUsername(), u.getPassword(), u.getAccountType(), 2000.0);
 				}
 				else if(accountType.equals("Driver")) {
-					/*Driver d_1 = new Driver();
+					Driver d_1 = new Driver();
 					d_1.setEmail(u.getEmail());
 					d_1.setUsername(u.getUsername());
 					d_1.setPassword(u.getPassword());
-					d_1.setAccountType(u.getAccountType());*/
+					d_1.setAccountType(u.getAccountType());
 					//Admin.getDriverList().add(d_1);
 					
-					DriverPage dp = new DriverPage(driver_X);
+					DriverPage dp = new DriverPage(d_1);
 				}
 				else if(accountType.equals("Seller")) {
-					/*Seller s_1 = new Seller();
+					Seller s_1 = new Seller();
 					s_1.setEmail(u.getEmail());
 					s_1.setUsername(u.getUsername());
 					s_1.setPassword(u.getPassword());
-					s_1.setAccountType(u.getAccountType());*/
+					s_1.setAccountType(u.getAccountType());
 					//Admin.getSellerList().add(s_1);
 					
-					SellerPage sp = new SellerPage(driver_X);
+					SellerPage sp = new SellerPage(s_1);
 				}
 				x = 1;
 			}
@@ -332,27 +333,11 @@ public class GUI extends JFrame implements ActionListener{
 		
 		if(flag1 == true) {
 			User user_X = new Customer();
-			customer_X.setEmail(email);
-			customer_X.setPassword(password);
-			customer_X.setUsername(username);
-			customer_X.setAccountType(accountType);
-			Admin.getCustomerList().add(customer_X);
-			
 			if (accountValid() == 2){
 				 user_X  = new Driver(); 
-				 driver_X.setEmail(email);
-				 driver_X.setPassword(password);
-				 driver_X.setUsername(username);
-				 driver_X.setAccountType(accountType);
-				 Admin.getDriverList().add(driver_X);
 			}
 			else if (accountValid() == 3) {
 				user_X = new Seller();
-				seller_X.setEmail(email);
-				seller_X.setPassword(password);
-				seller_X.setUsername(username);
-				seller_X.setAccountType(accountType);
-				Admin.getSellerList().add(seller_X);
 			}
 			user_X.setEmail(email);
 			user_X.setPassword(password);
@@ -360,8 +345,6 @@ public class GUI extends JFrame implements ActionListener{
 			user_X.setAccountType(accountType);	
 			userlist.add(user_X);
 			Admin.getUserList().add(user_X);
-			
-			
 			messageLabel.setForeground(new java.awt.Color(46,204,113));
 			messageLabel.setText("Your " + accountType + " account has been created."); 
 			valid = 1;
