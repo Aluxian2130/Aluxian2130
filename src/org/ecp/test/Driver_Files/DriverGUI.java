@@ -65,8 +65,10 @@ public class DriverGUI {
 		c1.setUsername("Wayne");
 		c1.setAccountType("Customer");
 		c1.setAddress(null);
+		c1.setPassword("password_100");
 		c1.setAccountBalance(3590);
-		CustomerPage cp = new CustomerPage(c1.getEmail(), c1.getUsername(), c1.getPassword(), c1.getAccountType(), 2000.0);
+		Admin.getUserList().add(c1);
+		//CustomerPage cp = new CustomerPage(c1.getEmail(), c1.getUsername(), c1.getPassword(), c1.getAccountType(), 2000.0);
 		
 		
 		//To test sellerPage
@@ -75,11 +77,11 @@ public class DriverGUI {
 		s1.setUsername("Robin");
 		s1.setAccountType("Seller");
 		s1.setAccountBalance(3590);
-		SellerPage p = new SellerPage(s1);
-		
-		//SellerPage sp = new SellerPage();
-		//DriverPage dp = new DriverPage();
-		//GUI home = new GUI("E commerce Platform");    
+		Admin.getUserList().add(s1);
+		//SellerPage p = new SellerPage(s1);
+	
+		//TO TEST AS A WHOLE
+		GUI home = new GUI("E commerce Platform");    
 		
 	}
 }
