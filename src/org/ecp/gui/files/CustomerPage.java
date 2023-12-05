@@ -65,7 +65,7 @@ public class CustomerPage extends JFrame implements ActionListener{
 	private Double totalPrice = 0.0;;
 	private String tempAddress = "unknown";
 	JLabel addressLabel = new JLabel();
-
+	 JLabel messageLabelCheck = new JLabel();
 
 	
     public CustomerPage(String emailIn, String usernameIn, String passwordIn, String accountTypeIn, double accountBalanceIn) {
@@ -205,6 +205,7 @@ public class CustomerPage extends JFrame implements ActionListener{
            		 if( p1.getName().equals(remTempItem) ) {
            			totalPrice = totalPrice - p1.getPrice();
            			Admin.getCustomerList().get(cIndex).myShopList.removeElement(remTempItem);
+           			messageLabelCheck.setText("<html>Product: "  + remTempItem.toString() +", has been removed from cart</html>");
             		stringShopList.remove(remTempItem);
             		Admin.getCustomerList().get(cIndex).setTotalPrice(totalPrice);
             		
@@ -395,10 +396,10 @@ public class CustomerPage extends JFrame implements ActionListener{
         frame2.setVisible(true);
      
         
-        JLabel messageLabel = new JLabel();
-        messageLabel.setBounds(160,10,200,300);
-        messageLabel.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
-        messageLabel.setForeground(new java.awt.Color(244,246,246));
+       
+        messageLabelCheck.setBounds(160,10,200,300);
+        messageLabelCheck.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
+        messageLabelCheck.setForeground(new java.awt.Color(244,246,246));
         
 
                
@@ -420,15 +421,15 @@ public class CustomerPage extends JFrame implements ActionListener{
                      	 }
                       }
                      // JOptionPane.showMessageDialog(null, item.toString());
-                     messageLabel.setForeground(new java.awt.Color(244,246,246));
-                 	 messageLabel.setText("<html>Product Information<br/>Item:"  + remTempItem.toString() +"<br/>Price: " + price +  
+                     messageLabelCheck.setForeground(new java.awt.Color(244,246,246));
+                 	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + remTempItem.toString() +"<br/>Price: " + price +  
                  			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") 
                  			 + "</html>");
                     
                   }
                   else {
-                	messageLabel.setForeground(new java.awt.Color(211,84,0));
-                  	messageLabel.setText("No item selected"); 
+                	messageLabelCheck.setForeground(new java.awt.Color(211,84,0));
+                  	messageLabelCheck.setText("No item selected"); 
                   }
                }
             }
@@ -445,8 +446,7 @@ public class CustomerPage extends JFrame implements ActionListener{
 	    removeFromCart.addActionListener(this);
 	    frame2.add(removeFromCart);
 	    
-        frame2.add(messageLabel);
-        frame2.add(messageLabel);
+        frame2.add(messageLabelCheck);
         //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
