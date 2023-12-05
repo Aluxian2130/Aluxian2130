@@ -41,7 +41,8 @@ public class CustomerPage extends JFrame implements ActionListener{
     JButton addToCart = new JButton("Add to cart");
     JButton makePayment = new JButton("Make Payment");
     JButton removeFromCart = new JButton("Remove product");
-
+    
+    
     Seller seller_A = new Seller();
     Seller seller_B = new Seller();
     
@@ -58,11 +59,14 @@ public class CustomerPage extends JFrame implements ActionListener{
 	DefaultListModel<String> myShopList = new DefaultListModel<>();
 	JList<String> listShop = new JList<>(myShopList);
 	ArrayList<String> stringShopList = new ArrayList<String>();
-	private String tempItem = " ";
+	private String tempItem = null;
+	private String remTempItem = null;
+	private Double totalPrice;
+
 
 	
     public CustomerPage(String emailIn, String usernameIn, String passwordIn, String accountTypeIn, double accountBalanceIn) {
-    	
+    	totalPrice = 0.0;
     	cIndex = 0;
     	//creating account
     	
@@ -92,15 +96,15 @@ public class CustomerPage extends JFrame implements ActionListener{
     	
     	//creating product A and B and C
     	prod_A.setName("iPhone");
-    	prod_A.setPrice(1199);
+    	prod_A.setPrice(30);
     	prod_A.setDescription("Really useful tool. Can make calls, text, take pictures and more!");
 
     	prod_B.setName("suitcase");
-    	prod_B.setPrice(45);
+    	prod_B.setPrice(10);
     	prod_B.setDescription("Can carry up to 28kg of weight.");
 
     	prod_C.setName("printer");
-    	prod_C.setPrice(155);
+    	prod_C.setPrice(20);
     	prod_C.setDescription("Prints in all colours");
     	
     	//Seller A has 2 and Seller B has 1
@@ -121,7 +125,10 @@ public class CustomerPage extends JFrame implements ActionListener{
     	
     	//list.setBounds(10,140, 200, 200);
     	
-    	
+    	message2.setBounds(150,240,250,100);
+        message2.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
+    	message2.setForeground(new java.awt.Color(244,246,246));
+    	message2.setText("Total payment amount: " + totalPrice + "$" );
     	
         title.setBounds(30, 10, 300, 30);
         title.setFont(new Font("serif", Font.BOLD, 25));
@@ -146,13 +153,12 @@ public class CustomerPage extends JFrame implements ActionListener{
         frame.add(accountDetailsButton);
         frame.add(cartBtn);
 
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new java.awt.Color(40, 55, 71));
         frame.setSize(500, 500);
         frame.setLayout(null);
         frame.setVisible(true);
-        
-        
+       
     }
     
     @Override
@@ -174,13 +180,68 @@ public class CustomerPage extends JFrame implements ActionListener{
 		 		System.out.println("Adding to cart");
 		 		handleAddToCart();
 			}
+    	 else if (e.getSource() == removeFromCart) { 
+		 		System.out.println("Removing from cart");
+		 		handleRemoveFromCart();
+			}
+    	 else if (e.getSource() == makePayment) { 
+		 		System.out.println("Making Payment");
+		 		handleMakePayment();
+			}
 	}
+    
+    private void handleMakePayment() {
+		// TODO Auto-generated method stub
+    	myShopList.clear();
+    	Admin.getCustomerList().get(cIndex).setAccountBalance(Admin.getCustomerList().get(cIndex).getAccountBalance() - totalPrice);	
+    	totalPrice = 0.0;
+    	message2.setText("Total payment amount: " + totalPrice + "$" );
+	}
+
+	private void handleRemoveFromCart() {
+		// TODO Auto-generated method stub
+    	if(myShopList.contains(remTempItem)) {
+    		
+    		for(Product p1: Admin.getProdAdminList()) {
+           		 if( p1.getName().equals(remTempItem) ) {
+           			totalPrice = totalPrice - p1.getPrice();
+           			myShopList.removeElement(remTempItem);
+            		stringShopList.remove(remTempItem);
+            		
+           		 }
+           	 	
+             }
+    
+    		message2.setText("Total payment amount: " + totalPrice + "$" );
+    	}
+		
+	}
+
+	public void setTotalPrice(Double x) {
+		this.totalPrice = x;
+	}
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+	
+	JLabel message2 = new JLabel();
     
     private void handleAddToCart() {
 		// TODO Auto-generated method stub
     	if(!myShopList.contains(tempItem)) {
     		myShopList.addElement(tempItem);
     		stringShopList.add(tempItem);
+    		
+    		totalPrice = 0.0;
+    		
+    		for(Product p1: Admin.getProdAdminList()) {
+            	for(String j: stringShopList) {
+           		 if(j.equals(p1.getName())) {
+           			 totalPrice = totalPrice + p1.getPrice();
+           		 }
+           	 	}
+             }
+    		message2.setText("Total payment amount: " + totalPrice + "$" );
     	}
 		
 	}
@@ -278,24 +339,18 @@ public class CustomerPage extends JFrame implements ActionListener{
                 	 Double price = 0.0;
                 	 String description = " ";
                      Object item = target.getModel().getElementAt(index);
-                     double totalPrice = 0;
                      for(Product p1: Admin.getProdAdminList()) {
                     	 if(p1.getName().equals(item.toString())) {
                     		 price = p1.getPrice();
                     		 description = p1.getDescription();
                     		 tempItem = item.toString();
                     	 }
-                    	 for(String j: stringShopList) {
-                    		 if(j.equals(p1.getName())) {
-                    			 totalPrice = totalPrice + p1.getPrice();
-                    		 }
-                    	 }
                      }
                     
                     // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabel.setForeground(new java.awt.Color(244,246,246));
                 	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
-                			 "<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+                			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
                   }
                   else {
                 	messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -311,14 +366,11 @@ public class CustomerPage extends JFrame implements ActionListener{
 	    frame2.add(addToCart);
         frame2.add(messageLabel);
         frame2.add(messageLabel);
-       frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	//#########################################################################################################################################
-	private Double totalPrice = 0.0;
-	public void setTotalPrice(Double x) {
-		this.totalPrice = x;
-	}
+	
 	private void handleCheckoutDetails() {
 		// TODO Auto-generated method stub
 		
@@ -349,7 +401,7 @@ public class CustomerPage extends JFrame implements ActionListener{
         
 
                
-        
+       
         listShop.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                if (me.getClickCount() == 1) {
@@ -363,20 +415,15 @@ public class CustomerPage extends JFrame implements ActionListener{
                      	 if(p1.getName().equals(item.toString())) {
                      		 price = p1.getPrice();
                      		 description = p1.getDescription();
-                     		 tempItem = item.toString();
+                     		 remTempItem = item.toString();
                      	 }
-                     	for(String j: stringShopList) {
-                    		 if(j.equals(p1.getName())) {
-                    			 totalPrice = totalPrice + p1.getPrice();
-                    		 }
-                    	 }
                       }
-                      setTotalPrice(totalPrice);
                      // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabel.setForeground(new java.awt.Color(244,246,246));
-                 	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
-                 			 "<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") 
-                 			 + "Total Payment Amount: " + totalPrice + "</html>");
+                 	 messageLabel.setText("<html>Product Information<br/>Item:"  + remTempItem.toString() +"<br/>Price: " + price +  
+                 			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") 
+                 			 + "</html>");
+                    
                   }
                   else {
                 	messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -386,11 +433,7 @@ public class CustomerPage extends JFrame implements ActionListener{
             }
          });
         
-        JLabel message2 = new JLabel();
-        message2.setBounds(160,240,200,100);
-        message2.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
-		message2.setForeground(new java.awt.Color(244,246,246));
-        message2.setText("Total payment amount: " + totalPrice);  
+     
         frame2.add(message2);
 
 	    makePayment.setBounds(290, 310, 140, 30);//ADD TO CART
@@ -449,7 +492,7 @@ public class CustomerPage extends JFrame implements ActionListener{
 	     
 	     
 	     
-	     frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	     //frame3.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	     frame3.getContentPane().setBackground(new java.awt.Color(40,55,71)); 
 	     frame3.setSize(450,400);
 	     frame3.setLayout(null);
