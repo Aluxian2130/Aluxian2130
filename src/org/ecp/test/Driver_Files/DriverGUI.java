@@ -61,6 +61,7 @@ public class DriverGUI {
     	OnlineMaps om1 = new OnlineMaps();
     	
     	//To test CustomerPage
+<<<<<<< HEAD
     			Customer c1 = new Customer();
     			c1.setEmail("Wayne@email");
     			c1.setUsername("Wayne");
@@ -121,6 +122,30 @@ public class DriverGUI {
     		
     			//TO TEST AS A WHOLE
     			GUI home = new GUI("E commerce Platform");      
+=======
+		Customer c1 = new Customer();
+		c1.setEmail("Wayne@email");
+		c1.setUsername("Wayne");
+		c1.setAccountType("Customer");
+		c1.setAddress(null);
+		c1.setPassword("blegh123");
+		c1.setAccountBalance(3590);
+		Admin.getUserList().add(c1);
+		//CustomerPage cp = new CustomerPage(c1.getEmail(), c1.getUsername(), c1.getPassword(), c1.getAccountType(), 2000.0);
+		
+		
+		//To test sellerPage
+		Seller s1 = new Seller();
+		s1.setEmail("Robin@email");
+		s1.setUsername("Robin");
+		s1.setAccountType("Seller");
+		s1.setAccountBalance(3590);
+		Admin.getUserList().add(s1);
+		//SellerPage p = new SellerPage(s1);
+	
+		//TO TEST AS A WHOLE
+		GUI home = new GUI("E commerce Platform");    
+>>>>>>> 28b6c0d1bbe6c55bf055ee314d3abbe6ee82bac5
 		
 	}
 }
