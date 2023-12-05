@@ -2,6 +2,10 @@ package org.ecp.people;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+
 import org.ecp.items.Order;
 import org.ecp.items.Product;
 import org.ecp.navigation.OnlineMaps;
@@ -12,20 +16,27 @@ public class Customer extends User {
    private ArrayList<Product> shoppingCart;
    private Order orderedProducts;
    private OnlineMaps om = new OnlineMaps();
+   
+   public DefaultListModel<String> myShopList = new DefaultListModel<>();
+   public JList<String> listShop = new JList<>(myShopList);
+   private Double totalPrice;
 
-   public Customer() {
+	
+   
+
+public Customer() {
+	   totalPrice = 0.0;
 	   address = "unknown";
 	   shoppingCart = new ArrayList<Product>();
 	   orderedProducts = null;
    }
-   public Customer(String email, String password, String username, String accountType, double accountBalance) {
-	   this.email = email;
-	   this.password = password;
-	   this.username = username;
-	   this.accountType = accountType;
-	   this.accountBalance = accountBalance;
-	   Admin.getUserList().add(this);
-   }
+public Double getTotalPrice() {
+	return totalPrice;
+}
+
+public void setTotalPrice(Double totalPrice) {
+	this.totalPrice = totalPrice;
+}
 
    public void setAddress(String addressChosen) {
       if (om.getAddressList().contains(addressChosen)) { this.address = addressChosen; }
@@ -157,4 +168,3 @@ public class Customer extends User {
 
    
 }
-

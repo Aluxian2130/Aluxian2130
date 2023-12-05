@@ -38,9 +38,6 @@ public class SellerPage {
         viewProductListBtn.setBounds(150, 210, 200, 30);
         editProductBtn.setBounds(150, 260, 200, 30);
         
-
-
-
         addProductBtn.addActionListener(this::handleAddProduct);
         removeProductBtn.addActionListener(this::handleRemoveProduct);
         viewProductListBtn.addActionListener(this::handleViewProductList);

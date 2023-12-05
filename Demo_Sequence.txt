@@ -1,0 +1,127 @@
+Checking Sign Up:
+1. Empty field
+	Email:	   Wayne@email
+	Username:  Wayne
+	Password:  p
+	Account:   []
+2. Email already taken
+	Email:     Wayne@email
+	Username:  Hannah
+	Password:  p
+	Account:   Customer
+3. Username in use
+	Email:     Hannah@email
+	Username:  Wayne
+	Password:  p
+	Account:   Customer
+4. Password length
+	Email:     Hannah@email
+	Username:  Hannah
+	Password:  p
+	Account:   Customer
+5. Valid Sign up
+	Email:     Hannah@email
+	Username:  Hannah
+	Password:  password_10
+	Account:   Customer
+
+Check Login:
+1. Email does not match
+	Email:     Wayne@
+	Username:  Wayne
+	Password:  password_10
+	Account:   Driver
+2. Password does not match
+	Email:     Wayne@email
+	Username:  Wayne
+	Password:  password_10
+	Account:   Driver	
+3. Account type does not match
+	Email:     Wayne@email
+	Username:  Wayne
+	Password:  password_100
+	Account:   Driver
+4. Valid Login
+	Email:     Wayne@email
+	Username:  Wayne
+	Password:  password_100
+	Account:   Customer
+	
+
+After Customer Login: 
+1. Edit Address
+	Click: Account Details
+	Click: Edit Address (Select Address)
+2. Checkout Sequence
+	Click: View Available Products -----------------> Still printing two sets
+	Click: iPhone, Add to Cart
+	Click: printer, Add to Cart
+	Click: X
+	Click: Checkout
+	Click: printer, Remove Product
+	Click: Make Payment
+	Click: Account Details (Observe balance decrease)
+
+	
+
+Login As Seller:
+1. Valid Login
+	Email:	   Robin@email
+	Username:  Robin
+	Password:  password_90
+	Account:   Seller
+
+After Seller Login
+1. View Product List (Verify empty)
+2. Add Product
+	1. Missing field price
+		Name:	  TV  -----------------> Need to make name mandatory
+		Descrip.: [] 
+		Price:    []
+		Quantity: 5
+	2. Valid Add Product
+		Name:	  TV  
+		Descrip.: [] 
+		Price:    100
+		Quantity: 5
+3. View Product List (Verify TV)
+4. Add Product:
+	1. Valid Add Product
+		Name:	  Mop  
+		Descrip.: [] 
+		Price:    13
+		Quantity: 2
+5. View Product List (Verify Mop, TV)
+6. Edit Product:
+	1. Invalid Product- Name: apple 
+	2. Valid Product- Name: TV
+		Name:	  Television  
+		Descrip.: Flatscreen 
+		Price:    120
+		Quantity: 5
+7. Remove Product
+	1. Invalid Product- Name: apple
+	2. Valid Product- Name: Television
+8. View Product List (Verify Television gone)
+
+
+
+
+Login As Driver:
+1. Valid Login
+	Email:	   Lisa@email
+	Username:  Lisa
+	Password:  password_80
+	Account:   Driver
+
+After Driver Login:
+1. View Delivery List (Verify Empty)
+2. Orders
+	1. Add Order- Name: John
+	2. Add Order- Name: Elisa
+	3. Remove Order- Name: John
+3. View Delivery List (Verify Elisa)
+4. View Map (Find Elisa)
+
+	
+

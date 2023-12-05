@@ -72,7 +72,8 @@ public class Seller extends User {
           String descript = myObj.nextLine();
           p1.setDescription(descript);
        }
-
+       p1.setSeller(this);
+       //p1.setSeller(username);
       // if (p1.getName() != "unknown" && p1.getPrice() != 0.0D && p1.getQuantity() != 0) {
       //    this.products.add(p1);
       // } else {

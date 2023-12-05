@@ -68,6 +68,8 @@ public class Order{
     public void addProductNames(String name) {
     	products.add(name);
     }
+    
+    
     public ArrayList<String> getProducts() {
     	return this.products;
     }
