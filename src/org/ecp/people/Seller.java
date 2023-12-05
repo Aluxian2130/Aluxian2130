@@ -21,6 +21,11 @@ public class Seller extends User {
 	   this.username = username;
 	   this.accountBalance = accountBalance;
    }
+   
+   public void addStaticProdList(Product p1) {
+	   Admin.getProdAdminList().add(p1);
+	   p1.setSeller(this);
+   }
    public ArrayList<Product> getProductList() {
       return this.products;
    }
@@ -81,7 +86,7 @@ public class Seller extends User {
 		   this.setProduct(p1);
 		   if (p1.getName() != "unknown" && p1.getPrice() != null) {
 			   this.addToProductList(p1);
-			   p1.setSeller(this);
+			   //p1.setSeller(this); //MAY NEED? ****************
 		   }
 		   else {
 			   System.out.println("Cannot add product to your account. "
@@ -98,6 +103,7 @@ public class Seller extends User {
 	   
    public void addToProductList(Product p1) {
 	   this.products.add(p1);
+	   p1.setSeller(this);
    }
    
    public void getPaid(Double amount) {
