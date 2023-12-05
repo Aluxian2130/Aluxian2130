@@ -3,6 +3,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -49,18 +52,41 @@ public class SellerPage {
     }
 
     private void handleAddProduct(ActionEvent e) {
-        String name = JOptionPane.showInputDialog(frame, "Enter Product Name:");
-        String description = JOptionPane.showInputDialog(frame, "Enter Product Description:");
-        double price = Double.parseDouble(JOptionPane.showInputDialog(frame, "Enter Product Price:"));
-        int quantity = Integer.parseInt(JOptionPane.showInputDialog(frame, "Enter Product Quantity:"));
+        JFrame addProductFrame = new JFrame("Add Product");
+        addProductFrame.setSize(400, 300);
 
-        if (name != null && description != null && !name.isEmpty() && !description.isEmpty()) {
-            Product newProduct = new Product(name, price, quantity);
-            newProduct.setDescription(description);
-            productList.add(newProduct);
-            JOptionPane.showMessageDialog(frame, "Product added successfully!");
-        } else {
-            JOptionPane.showMessageDialog(frame, "Please provide valid information!");
+        JTextField nameField = new JTextField();
+        JTextField descriptionField = new JTextField();
+        JTextField priceField = new JTextField();
+        JTextField quantityField = new JTextField();
+
+        JPanel panel = new JPanel(new GridLayout(5, 2));
+        panel.add(new JLabel("Name:"));
+        panel.add(nameField);
+        panel.add(new JLabel("Description:"));
+        panel.add(descriptionField);
+        panel.add(new JLabel("Price:"));
+        panel.add(priceField);
+        panel.add(new JLabel("Quantity:"));
+        panel.add(quantityField);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Add Product",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (result == JOptionPane.OK_OPTION) {
+            String name = nameField.getText();
+            String description = descriptionField.getText();
+            double price = Double.parseDouble(priceField.getText());
+            int quantity = Integer.parseInt(quantityField.getText());
+
+            if (!name.isEmpty() && !description.isEmpty()) {
+                Product newProduct = new Product(name, price, quantity);
+                newProduct.setDescription(description);
+                productList.add(newProduct);
+                JOptionPane.showMessageDialog(frame, "Product added successfully!");
+            } else {
+                JOptionPane.showMessageDialog(frame, "Please provide valid information!");
+            }
         }
     }
 
