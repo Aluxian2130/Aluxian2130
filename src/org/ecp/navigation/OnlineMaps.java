@@ -8,8 +8,10 @@ public class OnlineMaps {
 
    public OnlineMaps() {
       addressList = new ArrayList<String>();
-      for (int i = 1; i <= 5; i++) {
-         addressList.add("PO Box " + i);
+      Integer PO =  7187;
+      for (int i = 1; i <= 30; i++) {
+         addressList.add("PO Box " + PO);
+         PO = PO + 87 ;
       }
    }
 
@@ -62,7 +64,7 @@ public class OnlineMaps {
    }
    
 
-   public ArrayList<String> getAddressList() {
+   public static ArrayList<String> getAddressList() {
       return addressList;
    }
 }
