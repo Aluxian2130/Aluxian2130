@@ -16,15 +16,13 @@ public class Admin {
    private static ArrayList<Order> deliveryList;
    //private ArrayList<User> userList;
    private static ArrayList<User> userList = new ArrayList<User>();
+   
    private static ArrayList<Customer> customerList = new ArrayList<Customer>();
    private static ArrayList<Seller> sellerList = new ArrayList<Seller>();
    private static ArrayList<Driver> driverList = new ArrayList<Driver>();
-
-   //CHANGES ON 12_4_2023
+   
    private static ArrayList<Product> prodAdminList = new ArrayList<Product>();
-   public static ArrayList<Product> getProdAdminList() {
-	      return prodAdminList;
-	      }
+   
 
    public Admin() {
       maxLimit = 100.0;
@@ -84,22 +82,23 @@ public class Admin {
    }
    
    public static ArrayList<Customer> getCustomerList() {
-       return customerList;
+	      return customerList;
    }
    public static ArrayList<Driver> getDriverList() {
-       return driverList;
+	      return driverList;
    }
    public static ArrayList<Seller> getSellerList() {
-	   return sellerList;
+	      return sellerList;
    }
-   public void setCustomerList(ArrayList<Customer> customerList) {
-	   Admin.customerList = customerList;
+   public static ArrayList<Product> getProdAdminList() {
+	      return prodAdminList;
    }
-   public void setDriverList(ArrayList<Driver> driverList) {
-	   Admin.driverList = driverList;
-   }
-   public void setSellerList(ArrayList<Seller> sellerList) {
-	   Admin.sellerList = sellerList;
+   
+   public static void printCustomerList() {
+	   System.out.println("\nPRINTING CUSTOMER LIST");
+	   for(Customer u: customerList) {
+		   System.out.println("C-----Email: "  + u.getEmail() + " Username: " +  u.getUsername() + " Password: " + u.getPassword() + " " + u.getAccountType() );
+	   }
    }
 
    public static Boolean detectSignupConflict(String email, String username, String password, String accountType) {
