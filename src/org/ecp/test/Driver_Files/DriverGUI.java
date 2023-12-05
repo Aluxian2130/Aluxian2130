@@ -5,6 +5,7 @@ import org.ecp.gui.files.GUI;
 import org.ecp.gui.files.HomePage;
 import org.ecp.gui.files.SellerPage;
 import org.ecp.items.Product;
+import org.ecp.navigation.OnlineMaps;
 import org.ecp.people.Customer;
 import org.ecp.people.Driver;
 import org.ecp.people.Seller;
@@ -57,7 +58,7 @@ public class DriverGUI {
     	driver_A.setUsername("Tom");
     	Admin.getUserList().add(driver_A);
     	
-    	
+    	OnlineMaps om1 = new OnlineMaps();
     	
     	//To test CustomerPage
 		Customer c1 = new Customer();
@@ -65,7 +66,7 @@ public class DriverGUI {
 		c1.setUsername("Wayne");
 		c1.setAccountType("Customer");
 		c1.setAddress(null);
-		c1.setPassword("password_100");
+		c1.setPassword("blegh123");
 		c1.setAccountBalance(3590);
 		Admin.getUserList().add(c1);
 		//CustomerPage cp = new CustomerPage(c1.getEmail(), c1.getUsername(), c1.getPassword(), c1.getAccountType(), 2000.0);
