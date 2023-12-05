@@ -178,11 +178,23 @@ public class CustomerPage extends JFrame implements ActionListener{
 
 	private void handleMakePayment() {
 		// TODO Auto-generated method stub
-    	Admin.getCustomerList().get(cIndex).myShopList.clear();
-    	Admin.getCustomerList().get(cIndex).setAccountBalance(Admin.getCustomerList().get(cIndex).getAccountBalance() - totalPrice);	
-    	totalPrice = 0.0;
-    	Admin.getCustomerList().get(cIndex).setTotalPrice(totalPrice);
-    	message2.setText("Total payment amount: " +     	Admin.getCustomerList().get(cIndex).getTotalPrice() + "$" );
+		if(!Admin.getCustomerList().get(cIndex).getAddress().equals("unknown")) {
+	    	Admin.getCustomerList().get(cIndex).myShopList.clear();
+	    	Admin.getCustomerList().get(cIndex).setAccountBalance(Admin.getCustomerList().get(cIndex).getAccountBalance() - totalPrice);	
+	    	totalPrice = 0.0;
+	    	Admin.getCustomerList().get(cIndex).setTotalPrice(totalPrice);
+	    	message2.setText("Total payment amount: " +     	Admin.getCustomerList().get(cIndex).getTotalPrice() + "$" );
+	    	JOptionPane.showMessageDialog(null,
+        		    "Order has been completed!" ,
+        		    "Success!",
+        		    JOptionPane.PLAIN_MESSAGE );
+		}
+		else {
+			JOptionPane.showMessageDialog(null,
+        		    "Please update account address and try again.\nAddress cannot be unknown" ,
+        		    "Address Error",
+        		    JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void handleRemoveFromCart() {
