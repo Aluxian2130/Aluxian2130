@@ -1,20 +1,88 @@
 package org.ecp.test.Driver_Files;
 import org.ecp.gui.files.CustomerPage;
+import org.ecp.gui.files.DriverPage;
 import org.ecp.gui.files.GUI;
+import org.ecp.gui.files.HomePage;
+import org.ecp.gui.files.SellerPage;
+import org.ecp.items.Product;
 import org.ecp.people.Customer;
+import org.ecp.people.Driver;
+import org.ecp.people.Seller;
 import org.ecp.system.Admin;
 
 public class DriverGUI {
+	
+	
 	public static void main(String[] args)
 	{
-		/*Customer c1 = new Customer();
-        c1.setEmail("Aman@email");
-        c1.setUsername("Aman");
-        c1.setAccountType("Customer");
-        c1.setAddress(null);
-        c1.setAccountBalance(3590);
-        CustomerPage cp = new CustomerPage(c1);*/
-        
-		GUI login = new GUI("Login_GUI");    
+		Seller seller_A = new Seller();
+	    Seller seller_B = new Seller();
+	    
+	    Driver driver_A = new Driver();
+	    
+	    Product prod_A = new Product();
+		Product prod_B = new Product();
+		Product prod_C = new Product();
+		
+		
+    	
+    	//creating product A and B and C
+    	prod_A.setName("iPhone");
+    	prod_A.setPrice(30);
+    	prod_A.setDescription("Really useful tool. Can make calls, text, take pictures and more!");
+
+    	prod_B.setName("suitcase");
+    	prod_B.setPrice(10);
+    	prod_B.setDescription("Can carry up to 28kg of weight.");
+
+    	prod_C.setName("printer");
+    	prod_C.setPrice(20);
+    	prod_C.setDescription("Prints in all colours");
+    	
+    	//Seller A has 2 and Seller B has 1
+    	seller_A.addStaticProdList(prod_A);
+    	seller_A.addStaticProdList(prod_B);
+    	seller_B.addStaticProdList(prod_C);
+    	Admin.getSellerList().add(seller_A);
+    	Admin.getSellerList().add(seller_B);
+    	
+    	
+    	seller_A.setUsername("Lahiru");
+    	Admin.getUserList().add(seller_A);
+    	
+    	seller_B.setUsername("James");
+    	Admin.getUserList().add(seller_B);
+    	
+    	//dirver A 
+    	driver_A.setUsername("Tom");
+    	Admin.getUserList().add(driver_A);
+    	
+    	
+    	
+    	//To test CustomerPage
+		Customer c1 = new Customer();
+		c1.setEmail("Wayne@email");
+		c1.setUsername("Wayne");
+		c1.setAccountType("Customer");
+		c1.setAddress(null);
+		c1.setAccountBalance(3590);
+		CustomerPage cp = new CustomerPage(c1.getEmail(), c1.getUsername(), c1.getPassword(), c1.getAccountType(), 2000.0);
+		
+		
+		//To test sellerPage
+		Seller s1 = new Seller();
+		s1.setEmail("Robin@email");
+		s1.setUsername("Robin");
+		s1.setAccountType("Seller");
+		s1.setAccountBalance(3590);
+		SellerPage p = new SellerPage(s1);
+		
+		//SellerPage sp = new SellerPage();
+		//DriverPage dp = new DriverPage();
+		//GUI home = new GUI("E commerce Platform");    
+		
 	}
 }
+
+
+
