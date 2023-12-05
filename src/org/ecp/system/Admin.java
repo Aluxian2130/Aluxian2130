@@ -20,6 +20,12 @@ public class Admin {
    private static ArrayList<Seller> sellerList = new ArrayList<Seller>();
    private static ArrayList<Driver> driverList = new ArrayList<Driver>();
 
+   //CHANGES ON 12_4_2023
+   private static ArrayList<Product> prodAdminList = new ArrayList<Product>();
+   public static ArrayList<Product> getProdAdminList() {
+	      return prodAdminList;
+	      }
+
    public Admin() {
       maxLimit = 100.0;
       maxProducts = 10;
