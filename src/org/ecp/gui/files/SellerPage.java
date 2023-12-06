@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.ecp.items.Product;
 import org.ecp.people.Seller;
+import org.ecp.system.Admin;
 
 public class SellerPage {
     private JFrame frame = new JFrame();
@@ -100,13 +101,14 @@ public class SellerPage {
                 newProduct.setDescription(description);
             }
             Integer flag = 0;
-            for(Product p1: productList ) {
+            for(Product p1: Admin.getProdAdminList() ) {
             	if(newProduct.getName().equals(p1.getName())) {
             		flag = 1;
             	}
             }
             if(flag != 1) {
             	productList.add(newProduct);
+            	Admin.getProdAdminList().add(newProduct);
             	JOptionPane.showMessageDialog(frame, "Product added successfully!");
             }
             else {
@@ -119,7 +121,7 @@ public class SellerPage {
         String name = JOptionPane.showInputDialog(frame, "Enter Product Name to Remove:");
 
         boolean found = false;
-        for (Product product : productList) {
+        for (Product product : Admin.getProdAdminList()) {
             if (product.getName().equalsIgnoreCase(name)) {
                 found = true;
                 break;
@@ -127,7 +129,7 @@ public class SellerPage {
         }
 
         if (found) {
-            productList.removeIf(product -> product.getName().equalsIgnoreCase(name));
+            Admin.getProdAdminList().removeIf(product -> product.getName().equalsIgnoreCase(name));
             JOptionPane.showMessageDialog(frame, "Product removed successfully!");
         } else {
             JOptionPane.showMessageDialog(frame, "Product not found!");
@@ -146,7 +148,7 @@ public class SellerPage {
         String productName = JOptionPane.showInputDialog(frame, "Enter Product Name to Edit:");
 
         Product selectedProduct = null;
-        for (Product product : productList) {
+        for (Product product : Admin.getProdAdminList()) {
             if (product.getName().equalsIgnoreCase(productName)) {
                 selectedProduct = product;
                 break;
