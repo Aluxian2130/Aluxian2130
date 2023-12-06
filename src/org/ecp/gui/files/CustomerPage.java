@@ -357,8 +357,14 @@ public class CustomerPage extends JFrame implements ActionListener{
                     
                     // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabel.setForeground(new java.awt.Color(244,246,246));
-                	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                     if(description == null) {
+                    	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                    			 "$<br/>Description: No description added" + "</html>");
+                     }
+                     else {
+                    	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
                 			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+                     }
                   }
                   else {
                 	messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -428,9 +434,14 @@ public class CustomerPage extends JFrame implements ActionListener{
                       }
                      // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabelCheck.setForeground(new java.awt.Color(244,246,246));
-                 	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + remTempItem.toString() +"<br/>Price: " + price +  
-                 			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") 
-                 			 + "</html>");
+                     if(description == null) {
+                    	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                    			 "$<br/>Description: No description added" + "</html>");
+                     }
+                     else {
+                    	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+                     }
                     
                   }
                   else {
