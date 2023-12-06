@@ -2,6 +2,8 @@ package org.ecp.items;
 
 import java.util.ArrayList;
 
+import org.ecp.people.Customer;
+
 public class Order{
 	
     private String customerName;
@@ -12,9 +14,19 @@ public class Order{
     private ArrayList<String> products;
     
     public Order() {
+    	
         customerName = "unknown";
         customerAddress = "unknown";
         status = "unknown";
+        date = 0;
+        deliveryDate = date + 7;
+        products = new ArrayList<String>();
+    }
+    
+    public Order(Customer c1) {
+    	customerName = c1.getUsername() ;
+        customerAddress = c1.getAddress() ;
+        status = "unknown" ;
         date = 0;
         deliveryDate = date + 7;
         products = new ArrayList<String>();
@@ -68,8 +80,6 @@ public class Order{
     public void addProductNames(String name) {
     	products.add(name);
     }
-    
-    
     public ArrayList<String> getProducts() {
     	return this.products;
     }
