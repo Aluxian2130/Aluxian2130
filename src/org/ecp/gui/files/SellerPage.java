@@ -38,6 +38,9 @@ public class SellerPage {
         viewProductListBtn.setBounds(150, 210, 200, 30);
         editProductBtn.setBounds(150, 260, 200, 30);
         
+
+
+
         addProductBtn.addActionListener(this::handleAddProduct);
         removeProductBtn.addActionListener(this::handleRemoveProduct);
         viewProductListBtn.addActionListener(this::handleViewProductList);
@@ -96,8 +99,19 @@ public class SellerPage {
             if (!description.isEmpty()) {
                 newProduct.setDescription(description);
             }
-            productList.add(newProduct);
-            JOptionPane.showMessageDialog(frame, "Product added successfully!");
+            Integer flag = 0;
+            for(Product p1: productList ) {
+            	if(newProduct.getName().equals(p1.getName())) {
+            		flag = 1;
+            	}
+            }
+            if(flag != 1) {
+            	productList.add(newProduct);
+            	JOptionPane.showMessageDialog(frame, "Product added successfully!");
+            }
+            else {
+            	JOptionPane.showMessageDialog(frame, "Product named " + newProduct.getName() + " already exists");
+            }
         }
     }
 
