@@ -5,6 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -22,6 +23,7 @@ public class SellerPage {
     private JButton editProductBtn = new JButton("Edit Product");
     private JButton removeProductBtn = new JButton("Remove Product");
     private JButton viewProductListBtn = new JButton("View Product List");
+    private JButton logoutBtn = new JButton("Log Out");
 
 
     private List<Product> productList = new ArrayList<>();
@@ -38,14 +40,13 @@ public class SellerPage {
         removeProductBtn.setBounds(150, 160, 200, 30);
         viewProductListBtn.setBounds(150, 210, 200, 30);
         editProductBtn.setBounds(150, 260, 200, 30);
-        
-
-
+        logoutBtn.setBounds(385,425,90,25);
 
         addProductBtn.addActionListener(this::handleAddProduct);
         removeProductBtn.addActionListener(this::handleRemoveProduct);
         viewProductListBtn.addActionListener(this::handleViewProductList);
         editProductBtn.addActionListener(this::handleEditProduct);
+        logoutBtn.addActionListener(this::handleLogout);
 
         frame.add(header);
         frame.add(title);
@@ -53,6 +54,7 @@ public class SellerPage {
         frame.add(removeProductBtn);
         frame.add(viewProductListBtn);
         frame.add(editProductBtn);
+        frame.add(logoutBtn);
 
         frame.getContentPane().setBackground(new Color(40, 55, 71));
         frame.setSize(500, 500);
@@ -60,6 +62,10 @@ public class SellerPage {
         frame.setVisible(true);
     }
 
+    private void handleLogout(ActionEvent e) {
+    	frame.setVisible(false);
+    	//frame.dispose();
+    }
     private void handleAddProduct(ActionEvent e) {
         JFrame addProductFrame = new JFrame("Add Product");
         addProductFrame.setSize(400, 300);
@@ -144,8 +150,13 @@ public class SellerPage {
 
     private void handleViewProductList(ActionEvent e) {
         StringBuilder products = new StringBuilder("Product List:\n");
-        for (Product product : productList) {
-            products.append(product.getName()).append(" - $").append(product.getPrice()).append("\n");
+        if (productList.isEmpty()) {
+        	products.append("[No products]");
+        }
+        else {
+        	for (Product product : productList) {
+                products.append(product.getName()).append(" - $").append(product.getPrice()).append("\n");
+            }
         }
         JOptionPane.showMessageDialog(frame, products.toString());
     }

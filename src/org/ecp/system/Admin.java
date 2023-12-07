@@ -151,25 +151,4 @@ public class Admin {
 	   printDrivers();
    }
    
-   
-   public boolean checkAccount() {
-      return false;
-   }
-
-   public boolean checkFunds() {
-      return false;
-   }
-
-   public boolean checkPayment() {
-      return false;
-   }
-
-   public boolean checkProduct() {
-      return false;
-   }
-
-   public boolean checkStatus() {
-      return false;
-   }
 }
-
