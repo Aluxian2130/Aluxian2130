@@ -81,13 +81,18 @@ public class SellerPage {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Add Product",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-
+        
+        
+        
         if (result == JOptionPane.OK_OPTION) {
             String name = nameField.getText();
             String description = descriptionField.getText();
             double price;
             int quantity;
-
+            if (name.isEmpty()) {
+                JOptionPane.showMessageDialog(frame, "Name is required!");
+                return;
+            }
             try {
                 price = Double.parseDouble(priceField.getText());
                 quantity = Integer.parseInt(quantityField.getText());
