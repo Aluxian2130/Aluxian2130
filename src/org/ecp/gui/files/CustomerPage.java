@@ -44,7 +44,8 @@ public class CustomerPage extends JFrame implements ActionListener{
     JButton makePayment = new JButton("Make Payment");
     JButton removeFromCart = new JButton("Remove product");
     JButton addAddress = new JButton("Update address");
-    
+    JButton orderHistory = new JButton("Order history");
+    JButton addFunds = new JButton("Add Funds");
     
     Seller seller_A = new Seller();
     Seller seller_B = new Seller();
@@ -59,15 +60,16 @@ public class CustomerPage extends JFrame implements ActionListener{
 	private ArrayList<Product> cart = new ArrayList<Product>();
 	
 	
-	
+	private ArrayList<String> localHistory = new ArrayList<String>();
+
 	ArrayList<String> stringShopList = new ArrayList<String>();
 	private String tempItem = null;
 	private String remTempItem = null;
 	private Double totalPrice = 0.0;;
 	private String tempAddress = "unknown";
 	JLabel addressLabel = new JLabel();
-	 JLabel messageLabelCheck = new JLabel();
-
+	JLabel messageLabelCheck = new JLabel();
+	 
 	
     public CustomerPage(String emailIn, String usernameIn, String passwordIn, String accountTypeIn, double accountBalanceIn) {
     	totalPrice = 0.0;
@@ -117,10 +119,14 @@ public class CustomerPage extends JFrame implements ActionListener{
         seeProductsBtn.setBounds(150, 110, 200, 30);
         accountDetailsButton.setBounds(150, 160, 200, 30);
         cartBtn.setBounds(150, 210, 200, 30);
+        orderHistory.setBounds(150, 260, 200, 30);
+        
+
         
 		seeProductsBtn.addActionListener(this);
 		accountDetailsButton.addActionListener(this);
 		cartBtn.addActionListener(this);
+		orderHistory.addActionListener(this);
 
 
         frame.add(header);
@@ -128,6 +134,7 @@ public class CustomerPage extends JFrame implements ActionListener{
         frame.add(seeProductsBtn);
         frame.add(accountDetailsButton);
         frame.add(cartBtn);
+        frame.add(orderHistory);
 
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new java.awt.Color(40, 55, 71));
@@ -165,12 +172,38 @@ public class CustomerPage extends JFrame implements ActionListener{
 		 		handleMakePayment();
 			}
     	 else if (e.getSource() == addAddress) { 
-		 		System.out.println("Adding Payment");
+		 		System.out.println("Adding address");
 		 		handleAddAddress();
+			}
+    	 else if (e.getSource() == orderHistory) { 
+		 		System.out.println("Checking Order history");
+		 		handleOrderHistory();
+			}
+    	 else if (e.getSource() == addFunds) { 
+		 		System.out.println("Adding funds");
+		 		handleAddFunds();
 			}
 	}
     
-    private void handleAddAddress() {
+    private void handleAddFunds() {
+		// TODO Auto-generated method stub
+    	int inputAmount = JOptionPane.showConfirmDialog(null, null, "Edit Product",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+	}
+
+	private void handleOrderHistory() {
+		// TODO Auto-generated method stub
+    	 StringBuilder s1 = new StringBuilder("Past orders:\n");
+         for (String a : localHistory ) {
+        	 s1.append(a).append("\n");
+             //s1.append(a.getName()).append(" - $").append(a.getPrice()).append("\n");
+         }
+         JOptionPane.showMessageDialog(frame, s1.toString());
+		
+	}
+
+	private void handleAddAddress() {
 		// TODO Auto-generated method stub
     	Admin.getCustomerList().get(cIndex).setAddress(tempAddress);
     	 addressLabel.setForeground(new java.awt.Color(244,246,246));
@@ -181,7 +214,10 @@ public class CustomerPage extends JFrame implements ActionListener{
 	private void handleMakePayment() {
 		// TODO Auto-generated method stub
 		if(!Admin.getCustomerList().get(cIndex).getAddress().equals("unknown")) {
+			localHistory.addAll(Admin.getCustomerList().get(cIndex).getHistory());
+			Admin.getCustomerList().get(cIndex).getHistory().clear();
 	    	Admin.getCustomerList().get(cIndex).myShopList.clear();
+	    	stringShopList.clear();
 	    	Admin.getCustomerList().get(cIndex).setAccountBalance(Admin.getCustomerList().get(cIndex).getAccountBalance() - totalPrice);	
 	    	if(totalPrice != 0.0) {
 		    	JOptionPane.showMessageDialog(null,
@@ -211,6 +247,7 @@ public class CustomerPage extends JFrame implements ActionListener{
            		 if( p1.getName().equals(remTempItem) ) {
            			totalPrice = totalPrice - p1.getPrice();
            			Admin.getCustomerList().get(cIndex).myShopList.removeElement(remTempItem);
+            		Admin.getCustomerList().get(cIndex).getHistory().remove(tempItem);
            			messageLabelCheck.setText("<html>Product: "  + remTempItem.toString() +", has been removed from cart</html>");
             		stringShopList.remove(remTempItem);
             		Admin.getCustomerList().get(cIndex).setTotalPrice(totalPrice);
@@ -237,6 +274,7 @@ public class CustomerPage extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
     	if(!Admin.getCustomerList().get(cIndex).myShopList.contains(tempItem)) {
     		Admin.getCustomerList().get(cIndex).myShopList.addElement(tempItem);
+    		Admin.getCustomerList().get(cIndex).getHistory().add(tempItem);
     		stringShopList.add(tempItem);
     		
     		totalPrice = 0.0;
@@ -540,6 +578,10 @@ public class CustomerPage extends JFrame implements ActionListener{
         //frame2.add(errorLabel);
         addAddress.setBounds(290, 310, 140, 30);//ADD TO CART
 	    addAddress.addActionListener(this);
+	    
+	    addFunds.setBounds(150, 310, 140, 30);
+	    addFunds.addActionListener(this);
+	    frame3.add(addFunds);
 	    frame3.add(addAddress);
         frame3.add(messageLabel);
        //frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
