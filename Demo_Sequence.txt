@@ -53,7 +53,7 @@ After Customer Login:
 	Click: Account Details
 	Click: Edit Address (Select Address)
 2. Checkout Sequence
-	Click: View Available Products -----------------> Still printing two sets
+	Click: View Available Products 
 	Click: iPhone, Add to Cart
 	Click: printer, Add to Cart
 	Click: X
@@ -115,6 +115,13 @@ Login As Driver:
 	Account:   Driver
 
 After Driver Login:
+1. View Map with Addresses
+
+
+
+
+
+/*
 1. View Delivery List (Verify Empty)
 2. Orders
 	1. Add Order- Name: John
@@ -122,6 +129,4 @@ After Driver Login:
 	3. Remove Order- Name: John
 3. View Delivery List (Verify Elisa)
 4. View Map (Find Elisa)
-
-	
-
+*/

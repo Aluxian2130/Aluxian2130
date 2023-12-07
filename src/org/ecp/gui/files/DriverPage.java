@@ -85,11 +85,11 @@ public class DriverPage implements ActionListener{
     
     private void handleViewDeliveryList() {
     	JFrame deliveries = new JFrame("Delivery List");
-    	deliveries.setSize(400, 300);
+    	deliveries.setSize(400,300);
         
         DefaultListModel<String> myList = new DefaultListModel<>();
         JList<String> list = new JList<>(myList);
-		list.setBackground(new java.awt.Color(133, 118, 76));
+		list.setBackground(new java.awt.Color(133,118,76));
 		
 		JScrollPane scrollPane = new JScrollPane(list);
         Container contentPane = frame.getContentPane();
@@ -99,8 +99,8 @@ public class DriverPage implements ActionListener{
         deliveries.setSize(150,400);
         deliveries.setVisible(true);
          
-        deliveries.getContentPane().setBackground(new java.awt.Color(35, 55, 71));
-        deliveries.setSize(450, 400);
+        deliveries.getContentPane().setBackground(new java.awt.Color(35,55,71));
+        deliveries.setSize(450,400);
         deliveries.setLocation(20,30);
         deliveries.setLayout(null);
         deliveries.setVisible(true);
@@ -110,8 +110,6 @@ public class DriverPage implements ActionListener{
         messageLabel.setBounds(160,10,200,300);
         messageLabel.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 12));
         messageLabel.setForeground(new java.awt.Color(244,246,246));
-        
-        
 		
 	}
 

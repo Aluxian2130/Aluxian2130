@@ -29,10 +29,10 @@ public class DataGUI {
         String username = "Hannah";
         String accountType = "Customer";
         double accountBalance = 50.0;
-        Customer c1 = new Customer(email, password, username, accountType, accountBalance);
-        Customer c2 = new Customer("hey2@yahoo.aol", "starsign8!", "Josh", "Customer", 70.23);  
-        admin1.getUserList().add(c1);
-        admin1.getUserList().add(c2);
+        //Customer c1 = new Customer(email, password, username, accountType, accountBalance);
+        //Customer c2 = new Customer("hey2@yahoo.aol", "starsign8!", "Josh", "Customer", 70.23);  
+        //admin1.getUserList().add(c1);
+        //admin1.getUserList().add(c2);
         
 		
 		newGUI = new GUI("ECP_GUI");	
