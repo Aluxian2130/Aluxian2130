@@ -13,7 +13,7 @@ public class Admin {
    private static Integer maxProducts;
    private static Integer maxDeliveries;
    private ArrayList<Product> itemDirectory;
-   private static ArrayList<Order> deliveryList;
+   private static ArrayList<Order> deliveryList = new ArrayList<Order>();;
    //private ArrayList<User> userList;
    private static ArrayList<User> userList = new ArrayList<User>();
    
@@ -29,7 +29,6 @@ public class Admin {
       maxProducts = 10;
       maxDeliveries = 5;
       itemDirectory = new ArrayList<Product>();
-      deliveryList = new ArrayList<Order>();
       //userList = new ArrayList<User>();
    }
 

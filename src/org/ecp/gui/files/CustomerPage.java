@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import org.ecp.items.Order;
 import org.ecp.items.Product;
 import org.ecp.navigation.OnlineMaps;
 import org.ecp.people.Customer;
@@ -176,18 +177,23 @@ public class CustomerPage extends JFrame implements ActionListener{
 	     addressLabel.setText("Address: " + Admin.getCustomerList().get(cIndex).getAddress() );
 	}
 
+    
 	private void handleMakePayment() {
 		// TODO Auto-generated method stub
 		if(!Admin.getCustomerList().get(cIndex).getAddress().equals("unknown")) {
 	    	Admin.getCustomerList().get(cIndex).myShopList.clear();
 	    	Admin.getCustomerList().get(cIndex).setAccountBalance(Admin.getCustomerList().get(cIndex).getAccountBalance() - totalPrice);	
+	    	if(totalPrice != 0.0) {
+		    	JOptionPane.showMessageDialog(null,
+	        		    "Order has been completed!" ,
+	        		    "Success!",
+	        		    JOptionPane.PLAIN_MESSAGE );
+		    	Order tempOrder = new Order(Admin.getCustomerList().get(cIndex));
+		    	Admin.getDeliveryList().add(tempOrder);
+		    	}
 	    	totalPrice = 0.0;
 	    	Admin.getCustomerList().get(cIndex).setTotalPrice(totalPrice);
-	    	message2.setText("Total payment amount: " +     	Admin.getCustomerList().get(cIndex).getTotalPrice() + "$" );
-	    	JOptionPane.showMessageDialog(null,
-        		    "Order has been completed!" ,
-        		    "Success!",
-        		    JOptionPane.PLAIN_MESSAGE );
+	    	message2.setText("Total payment amount: " +  Admin.getCustomerList().get(cIndex).getTotalPrice() + "$" );
 		}
 		else {
 			JOptionPane.showMessageDialog(null,
@@ -351,8 +357,14 @@ public class CustomerPage extends JFrame implements ActionListener{
                     
                     // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabel.setForeground(new java.awt.Color(244,246,246));
-                	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                     if(description == null) {
+                    	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                    			 "$<br/>Description: No description added" + "</html>");
+                     }
+                     else {
+                    	 messageLabel.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
                 			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+                     }
                   }
                   else {
                 	messageLabel.setForeground(new java.awt.Color(211,84,0));
@@ -422,9 +434,14 @@ public class CustomerPage extends JFrame implements ActionListener{
                       }
                      // JOptionPane.showMessageDialog(null, item.toString());
                      messageLabelCheck.setForeground(new java.awt.Color(244,246,246));
-                 	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + remTempItem.toString() +"<br/>Price: " + price +  
-                 			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") 
-                 			 + "</html>");
+                     if(description == null) {
+                    	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                    			 "$<br/>Description: No description added" + "</html>");
+                     }
+                     else {
+                    	 messageLabelCheck.setText("<html>Product Information<br/>Item:"  + item.toString() +"<br/>Price: " + price +  
+                			 "$<br/>Description: " + description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
+                     }
                     
                   }
                   else {

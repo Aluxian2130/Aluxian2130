@@ -182,11 +182,11 @@ public class GUI extends JFrame implements ActionListener{
 				}
 				else if(this.detect_AccountType_Match() == 1) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Account type does not match");
+					messageLabel.setText("Account type: " + accountType + " does not exist for this user. Choose another");
 				}
 				else  if(this.detectUsername_Email_Match() != 2) {
 					messageLabel.setForeground(new java.awt.Color(211,84,0));
-					messageLabel.setText("Email does not exist");
+					messageLabel.setText("Email does not exist. Use Valid Email or Click Sign Up");
 				}
 				else {
 					//messageLabel.setForeground(new java.awt.Color(211,84,0));

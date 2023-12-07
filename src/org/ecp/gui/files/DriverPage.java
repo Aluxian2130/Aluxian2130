@@ -23,6 +23,7 @@ import java.awt.event.MouseEvent;
 
 import org.ecp.items.Order;
 import org.ecp.items.Product;
+import org.ecp.people.Customer;
 import org.ecp.people.Driver;
 import org.ecp.system.Admin;
 
@@ -43,7 +44,8 @@ public class DriverPage implements ActionListener{
     private ArrayList<Order> orderList = new ArrayList<>();
     private int deliveries = 0;
     private String tempItem = null;
-    
+	private Order oas1 = new Order();;
+
     public DriverPage(Driver d1) {
         title.setBounds(30, 10, 300, 30);
         title.setFont(new Font("serif", Font.BOLD, 25));
@@ -63,11 +65,10 @@ public class DriverPage implements ActionListener{
 
         frame.add(header);
         frame.add(title);
-        frame.add(deliveryList);
         frame.add(ordersBtn);
         frame.add(mapBtn);
 
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+       // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new java.awt.Color(40, 55, 71));
         frame.setSize(500, 500);
         frame.setLayout(null);
@@ -77,13 +78,20 @@ public class DriverPage implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
     	if (e.getSource() == ordersBtn) { handleViewOrders(); }
-    	else if (e.getSource() == deliveryList) { handleViewDeliveryList(); }
+    	else if (e.getSource() == deliveryList) {
+    		//handleViewDeliveryList(); 
+    		}
     	else if (e.getSource() == mapBtn) { handleViewMap(); }
-    	else if (e.getSource() == addToDeliveryList) { handleAddToDeliveryList(); } 
-    	else if (e.getSource() == removeFromDeliveryList) { handleRemoveFromDeliveryList(); }
+    	else if (e.getSource() == addToDeliveryList) { 
+    		//handleAddToDeliveryList(); 
+    		} 
+    	else if (e.getSource() == removeFromDeliveryList) { 
+    		//handleRemoveFromDeliveryList(); 
+    		}
     }
     
     private void handleViewDeliveryList() {
+    	System.out.println("TTTTTTTTEEEEEEEEEEEEEEESTTTTTTTTTTTT");
     	JFrame deliveries = new JFrame("Delivery List");
     	deliveries.setSize(400,300);
         
@@ -127,15 +135,11 @@ public class DriverPage implements ActionListener{
 		Orders.setSize(400, 300);
       
         
-		if(Admin.getDeliveryList().isEmpty()) {
-		    errorLabel.setText("No orders");
-		    System.out.println("NO ORDERS!!!!!!!!");
-		}
-		else {
+	
 			for(Order o: Admin.getDeliveryList()) {
 				myList.addElement(o.getCustomerName()) ;
 			}
-		} 
+		
 		
 		
 		Orders = new JFrame("Orders");
@@ -187,7 +191,7 @@ public class DriverPage implements ActionListener{
                      }
                      messageLabel.setForeground(new java.awt.Color(244,246,246));
                 	 messageLabel.setText("<html>Order Information<br/>Customer Name: "  + item.toString() +"<br/>Customer Address: " + customerAddress +  
-                			 "$<br/>Status: " + status + "<br/>Delivery Date: " + deliveryDate + "<br/>Products: " );
+                			 "<br/>Status: " + status + "<br/>Delivery Date: " + deliveryDate + "</html>" );
                 			 //description.replaceAll("<","&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br/>") + "</html>");
                   }
                   else {
@@ -201,24 +205,43 @@ public class DriverPage implements ActionListener{
         deliveryMessage.setBounds(150, 330, 250, 25);
         deliveryMessage.setFont(new Font("monospaced", Font.ITALIC + Font.BOLD, 10));
         deliveryMessage.setForeground(new java.awt.Color(244,246,246));
-        addToDeliveryList.setBounds(300, 300, 130, 30);//ADD TO CART
-        addToDeliveryList.addActionListener(this); //IF BUTTON PRESSED ADD TO CART
-        removeFromDeliveryList.setBounds(150, 300, 130, 30);
-        addToDeliveryList.addActionListener(this);
-        Orders.add(removeFromDeliveryList);
-        Orders.add(addToDeliveryList);
+       // addToDeliveryList.setBounds(300, 300, 130, 30);//ADD TO CART
+       // addToDeliveryList.addActionListener(this); //IF BUTTON PRESSED ADD TO CART
+       // removeFromDeliveryList.setBounds(150, 300, 130, 30);
+       // addToDeliveryList.addActionListener(this);
+       // Orders.add(removeFromDeliveryList);
+       // Orders.add(addToDeliveryList);
         Orders.add(deliveryMessage);
         Orders.add(messageLabel);
         Orders.add(messageLabel);
          
     	
     }
+	
+	JFrame map = new JFrame("Map");
+	JLabel displayField;
+	ImageIcon image;
+	
     private void handleViewMap() {
-    	JFrame map = new JFrame("Map");
+    	
+    	map = new JFrame("Map");
+    	
+    	try {
+    		image = new ImageIcon(getClass().getResource("OurMaps.png"));
+    		displayField = new JLabel(image);
+    		map.add(displayField);
+    	}catch(Exception e) {
+    		System.out.println("Cant found");
+    	}
+    	map.pack();
+    	map.setVisible(true);
+    	
+    	
         String Address3 = "9001 S Sycamore Ln";
-
-        JLabel l1 = new JLabel("5678 W Elm St");
-        JLabel l2 = new JLabel("1234 E Willow Dr");
+        JLabel l1 = new JLabel("8098 N Stone St");
+        JLabel l2 = new JLabel("3508 W Blvd St");
+       // addressList.add("8098 N Stone St");
+       // addressList.add("3508 W Blvd St");
         //JLabel l1 = new JLabel(orderList.get(0).getCustomerAddress());
         //JLabel l2 = new JLabel(orderList.get(1).getCustomerAddress());
         JLabel l3 = new JLabel(Address3);
@@ -251,7 +274,7 @@ public class DriverPage implements ActionListener{
         map.getContentPane().setBackground(new java.awt.Color(40,55,71));
     	map.setLayout(null);
     	map.setVisible(true);
-        map.setSize(550, 400);   
+        //map.setSize(550, 400);   
         
     }
     
