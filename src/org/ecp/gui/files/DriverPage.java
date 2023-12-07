@@ -38,6 +38,7 @@ public class DriverPage implements ActionListener{
     JButton removeFromDeliveryList = new JButton("Remove");
     JButton ordersBtn = new JButton("Orders");
     JButton mapBtn = new JButton("View Map"); // New button for the map
+    JButton logoutBtn = new JButton("Log Out");
 
     DefaultListModel<String> OrderList = new DefaultListModel<>();
 	ArrayList<String> stringOrderList = new ArrayList<String>();
@@ -45,7 +46,7 @@ public class DriverPage implements ActionListener{
     private int deliveries = 0;
     private String tempItem = null;
 	private Order oas1 = new Order();;
-
+	
     public DriverPage(Driver d1) {
         title.setBounds(30, 10, 300, 30);
         title.setFont(new Font("serif", Font.BOLD, 25));
@@ -58,16 +59,19 @@ public class DriverPage implements ActionListener{
         deliveryList.setBounds(150, 110, 200, 30);
         ordersBtn.setBounds(150, 160, 200, 30);
         mapBtn.setBounds(150, 210, 200, 30); // Position for the Map button
+        logoutBtn.setBounds(385,425,90,25);
         
         deliveryList.addActionListener(this);
         ordersBtn.addActionListener(this);
         mapBtn.addActionListener(this);
+        logoutBtn.addActionListener(this);
 
         frame.add(header);
         frame.add(title);
         frame.add(ordersBtn);
         frame.add(mapBtn);
-
+        frame.add(logoutBtn);
+        
        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(new java.awt.Color(40, 55, 71));
         frame.setSize(500, 500);
@@ -78,16 +82,19 @@ public class DriverPage implements ActionListener{
     
     public void actionPerformed(ActionEvent e) {
     	if (e.getSource() == ordersBtn) { handleViewOrders(); }
-    	else if (e.getSource() == deliveryList) {
-    		//handleViewDeliveryList(); 
-    		}
+    	else if (e.getSource() == deliveryList) { //handleViewDeliveryList(); 
+    	}
     	else if (e.getSource() == mapBtn) { handleViewMap(); }
-    	else if (e.getSource() == addToDeliveryList) { 
-    		//handleAddToDeliveryList(); 
-    		} 
-    	else if (e.getSource() == removeFromDeliveryList) { 
-    		//handleRemoveFromDeliveryList(); 
-    		}
+    	else if (e.getSource() == addToDeliveryList) { //handleAddToDeliveryList(); 
+    	} 
+    	else if (e.getSource() == removeFromDeliveryList) {  //handleRemoveFromDeliveryList(); 
+    	}
+    	else if (e.getSource() == logoutBtn) { handleLogout();}
+    }
+    
+    private void handleLogout() {
+    	frame.setVisible(false);
+    	//frame.dispose();
     }
     
     private void handleViewDeliveryList() {
